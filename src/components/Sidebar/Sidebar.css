@@ -1,0 +1,76 @@
+/* Sidebar container */
+.sidebar {
+  width: 220px;          /* Increased from 260px */
+  flex: 0 0 260px;
+  align-self: flex-start;
+  position: sticky;
+  top: calc(var(--space-lg) + 8px);
+  height: calc(100vh - (var(--space-lg) + 8px));
+}
+
+/* Inner box styling */
+.sidebar-inner {
+  background: #0f1724;
+  color: #fff;
+  padding: var(--space-lg);  /* Bigger padding for a more spacious look */
+  border-radius: 16px;       /* Slightly larger radius */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* Left-align content for a sidebar */
+  text-align: left;
+  height: 50%;
+}
+
+/* Avatar image */
+.avatar {
+  width: 160px;               /* Bigger image */
+  height: 160px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: var(--space-md);
+}
+
+/* Name and info */
+.sidebar h3 {
+  margin: 0 0 var(--space-xs);
+  font-size: 1.5rem;
+}
+.sidebar .location {
+  opacity: 0.9;
+  margin: 0 0 var(--space-sm);
+}
+.sidebar .email a {
+  color: #62a0ff;
+  word-break: break-word;
+}
+
+/* Social links */
+.sidebar-socials a {
+  display: inline-block;
+  margin: var(--space-xs) var(--space-sm) 0 0;
+  color: #62a0ff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.sidebar-socials a:hover {
+  color: #a0c4ff;
+}
+
+.sidebar-actions{margin:var(--space-md) 0}
+.resume-link{display:inline-block;padding:0.6rem 0.9rem;background:#1b6cff;color:white;border-radius:8px;text-decoration:none}
+.resume-link:hover{background:#145bd6}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .sidebar {
+    width: auto;
+    flex: auto;
+  }
+  .sidebar-inner {
+    padding: var(--space-md);
+  }
+  .avatar {
+    width: 140px;
+    height: 140px;
+  }
+}

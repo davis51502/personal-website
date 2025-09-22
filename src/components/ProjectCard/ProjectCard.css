@@ -1,0 +1,4 @@
+.project-card{background:#fff;border:1px solid #e6eef6;padding:var(--space-md);border-radius:10px}
+.project-card h4{margin:0 0 var(--space-sm)}
+.project-desc{color:var(--muted)}
+.project-links a{margin-right:var(--space-sm);color:var(--accent);text-decoration:none}

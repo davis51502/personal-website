@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import About from './components/About';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Header from './components/Header/Header';
+import Sidebar from './components/Sidebar/Sidebar';
+import About from './components/About/About';
+import Projects from './components/Projects/Projects';
+import Contact from './components/Contact/Contact';
+import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
 
 function App() {
@@ -24,11 +25,20 @@ function App() {
   return (
     <div className="App">
       <Header name={name} title={title} socials={socials} activeSection={activeSection} onNavigate={handleNavigate} />
-      <main>
-        {activeSection === 'about' && <About bio={bio} skills={skills} />}
-        {activeSection === 'projects' && <Projects projects={projects} />}
-        {activeSection === 'contact' && <Contact email="daviswollesen@gmail.com" />}
-      </main>
+      <div className="layout container">
+        <Sidebar
+          name={name}
+          location="Danville, CA"
+          email="daviswollesen@gmail.com"
+          socials={socials}
+          photo="/IMG_0922.jpeg"
+        />
+        <main className="content">
+          {activeSection === 'about' && <About bio={bio} skills={skills} />}
+          {activeSection === 'projects' && <Projects projects={projects} />}
+          {activeSection === 'contact' && <Contact email="daviswollesen@gmail.com" />}
+        </main>
+      </div>
       <Footer />
     </div>
   );

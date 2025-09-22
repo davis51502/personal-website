@@ -1,0 +1,4 @@
+.about h2{margin-top:0}
+.about .bio{max-width:60ch;color:#1f2d3d}
+.about .skills{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-sm)}
+.about .skills li{background:#eef6ff;padding:8px 14px;border-radius:10px}
