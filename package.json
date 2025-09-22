@@ -21,7 +21,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://davis51502.github.io/personal-website",
+  "homepage": "https://daviswollesen.click",
   "eslintConfig": {
     "extends": [
       "react-app",
