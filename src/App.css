@@ -1,11 +1,13 @@
-:root {
-  /* Spacing */
-  --space-xs: 0.375rem;  /* 6px */
-  --space-sm: 0.75rem;   /* 12px */
-  --space-md: 1.125rem;  /* 18px */
-  --space-lg: 1.5rem;    /* 24px */
-  --space-xl: 2.25rem;   /* 36px */
-
+:root{
+  --container-width: 1100px;
+  --space-xs: 0.5rem;
+  --space-sm: 0.67rem;
+  --space-md: 1.25rem;
+  --space-lg: 1.5rem;
+  --sidebar-width: 20rem;
+  --muted: #556;
+  --accent: #2b8cff;
+  --bg: #f7f9fb;
   /* Layout */
   --container-width: 60rem; /* 960px */
 
@@ -59,9 +61,10 @@ a:hover {
 /* Layout */
 .layout {
   display: flex;
-  gap: var(--space-lg);
   align-items: flex-start;
-  flex-wrap: wrap;
+  max-width: 1000px;   /* keep content from stretching too wide */
+  margin: 0 auto;      /* center whole layout in viewport */
+  padding: var(--space-lg);
 }
 .layout.container{
   /* Reduce left padding inside the layout so the sidebar sits closer to the page edge */
@@ -69,6 +72,14 @@ a:hover {
 }
 .sidebar {
   flex: 0 0 20rem; /* 320px */
+  position: sticky;
+  top: 6rem;
+  height: fit-content;
+}
+.content {
+  flex: 10;              /* take all remaining space */
+  margin-left: -90px;
+  min-width: 0;         /* prevent overflow */
 }
 .sidebar-inner {
   background: #f8fbff;

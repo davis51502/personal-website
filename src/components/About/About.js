@@ -1,17 +1,17 @@
 import React from 'react';
 import './About.css';
 
-export default function About({ bio, skills }) {
+export default function About({ bio, skills = [] }) {
   return (
-    <section id="about" className="about container">
-      <h2>About</h2>
+    <section id="about" className="about">
+      <h2 className="section-title">About</h2>
       <p className="bio">{bio}</p>
-      <h3>Skills</h3>
-      <ul className="skills">
-        {skills.map(s => (
-          <li key={s}>{s}</li>
+
+      <div className="skills">
+        {skills.map((s, i) => (
+          <span key={i} className="skill">{s}</span>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

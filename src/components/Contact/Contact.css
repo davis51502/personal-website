@@ -1,1 +1,57 @@
-.contact a{color:var(--accent)}
+/* Contact.css */
+.contact {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.contact.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 3rem;
+}
+
+.contact p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact a {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.contact a:hover {
+  color: #2c5282;
+  text-decoration: underline;
+}
+
+.contact a:focus {
+  outline: 2px solid #3182ce;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 3rem 1rem;
+  }
+  
+  .contact h2 {
+    font-size: 2rem;
+  }
+  
+  .contact p {
+    font-size: 1rem;
+  }
+}

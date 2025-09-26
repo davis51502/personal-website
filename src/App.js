@@ -12,7 +12,7 @@ function App() {
   const name = 'Davis Wollesen';
   const title = 'Software Engineer/Investment Analyst';
   const bio = "I'm a Computer Science major involved in investment analytics.";
-  const skills = ['React', 'JavaScript', 'HTML', 'CSS', 'Node.js'];
+  const skills = ['React', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Python', 'SQL', 'Git', 'Docker'];
 
   const [activeSection, setActiveSection] = React.useState('about');
 
