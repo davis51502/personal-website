@@ -17,7 +17,7 @@ export default function Sidebar({ name, location, email, socials = [], photo }) 
         <div className="sidebar-actions">
           <a
             className="resume-link"
-            href="/Resume-Davis-Wollesen.pdf"
+            href="/(Resume Davis Wollesen).pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
