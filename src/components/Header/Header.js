@@ -19,8 +19,11 @@ export default function Header({ name, title, socials, activeSection, onNavigate
     <header className="header">
       <div className="container header-inner">
         <div className="brand">
-          <h1 className="name">{name}</h1>
-          <p className="title">{title}</p>
+          <img src="/dw.jpeg" alt="Davis Wollesen Software Engineer/Investment Analyst" className="title-logo" />
+          <div className="brand-text">
+            <h1 className="name">{name}</h1>
+            <p className="title">{title}</p>
+          </div>
         </div>
         <nav className="main-nav">
           {link('about', 'About')}

@@ -1,116 +1,100 @@
-/* Sidebar container */
+/* --- Main Sidebar Container --- */
 .sidebar {
-  width: 20rem;                  /* set actual width */
-  position: relative;               /* stay pinned on left */
-  top: 10px;
-  left: -8rem;
-  height: calc(100vh- 64px);                 /* full height */
-  overflow-y: auto;
-  padding: var(--space-md);
-  background: var(--sidebar-bg, #fff);
-  border-radius: 0 12px 12px 0;  /* only round the right edge */
-  box-shadow: 0 6px 18px rgba(20, 20, 40, 0.04);
+  background-color: #f8f9fa; /* A light, neutral background */
+  border-right: 1px solid #dee2e6;
+  padding: 2rem 1.5rem;
+  width: 280px; /* Fixed width for the sidebar */
+  height: 50vh; /* Make it full height */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: fixed; /* Keeps it in place on scroll */
+  top: 13rem;
+  left: 60px;
 }
 
-.sidebar * {
-  box-sizing: border-box;
-}
-
-/* Inner box styling */
 .sidebar-inner {
-  background: #0f1724;
-  color: #fff;
-  padding: var(--space-lg);
-  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  min-height: 100%; /* ensures it fills vertically */
+  align-items: center; /* Center all content horizontally */
+  text-align: center;
 }
 
-/* Avatar image */
+/* --- Avatar/Photo --- */
 .avatar {
-  width: 160px;
-  height: 160px;
-  border-radius: 16px;
-  object-fit: cover;
-  margin-bottom: var(--space-md);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Prevents image distortion */
+  margin-bottom: 1rem;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Name and info */
+/* --- Typography --- */
 .sidebar h3 {
-  margin: 0 0 var(--space-xs);
-  font-size: 1.5rem;
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #212529;
 }
 
-.sidebar .location {
-  opacity: 0.9;
-  margin: 0 0 var(--space-sm);
+.sidebar p {
+  margin: 0.25rem 0;
+  color: #6c757d; /* Softer text color for details */
+  font-size: 0.95rem;
 }
 
 .sidebar .email a {
-  color: #62a0ff;
-  word-break: break-word;
-  text-decoration: none;
-}
-
-.sidebar .email a:hover {
-  text-decoration: underline;
-}
-
-/* Social links */
-.sidebar-socials {
-  margin-top: var(--space-md);
-}
-
-.sidebar-socials a {
-  display: inline-block;
-  margin: var(--space-xs) var(--space-sm) 0 0;
-  color: #62a0ff;
+  color: #007bff; /* A nice accent color for the email link */
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
 
-.sidebar-socials a:hover {
-  color: #a0c4ff;
+.sidebar .email a:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
 
-/* Actions */
+/* --- Action Button (Resume) --- */
 .sidebar-actions {
-  margin: var(--space-md) 0;
+  margin: 1.5rem 0;
+  width: 100%;
 }
 
 .resume-link {
   display: inline-block;
-  padding: 0.6rem 0.9rem;
-  background: #1b6cff;
-  color: white;
-  border-radius: 8px;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px; /* Softer, rounded corners */
   text-decoration: none;
-  transition: background 0.2s ease-in-out;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease;
 }
 
 .resume-link:hover {
-  background: #145bd6;
+  background-color: #0056b3;
+  transform: translateY(-2px); /* Slight lift on hover */
 }
 
-/* Main content area */
-.main-content {
-  margin-left: 20rem;   /* same as .sidebar width */
-  padding: var(--space-lg);
+/* --- Social Media Links --- */
+.sidebar-socials {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1.5rem; /* Space out the social icons */
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
-  .sidebar {
-    position: relative;  /* stack above content on small screens */
-    width: 100%;
-    height: auto;
-    border-radius: 0;
-  }
+.sidebar-socials a {
+  color: #6c757d;
+  font-size: 1.5rem; /* Makes icons larger and easier to click */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, transform 0.2s ease;
+}
 
-  .main-content {
-    margin-left: 0;      /* no gap on mobile */
-  }
+.sidebar-socials a:hover {
+  color: #212529; /* Darken icon on hover */
+  transform: scale(1.1);
 }

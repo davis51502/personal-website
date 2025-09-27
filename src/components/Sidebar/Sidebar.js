@@ -1,6 +1,9 @@
 import React from "react";
 import "./Sidebar.css";
+// Example: Import icons from the library
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
+// The 'socials' prop now expects an 'icon' property
 export default function Sidebar({ name, location, email, socials = [], photo }) {
   return (
     <aside className="sidebar">
@@ -21,8 +24,9 @@ export default function Sidebar({ name, location, email, socials = [], photo }) 
             target="_blank"
             rel="noopener noreferrer"
           >
-            Resume
+            View Resume
           </a>
+          
         </div>
 
         {socials.length > 0 && (
@@ -33,8 +37,9 @@ export default function Sidebar({ name, location, email, socials = [], photo }) 
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={s.name} // Good for accessibility
               >
-                {s.name}
+                {s.icon} {/* Render the icon component here */}
               </a>
             ))}
           </div>

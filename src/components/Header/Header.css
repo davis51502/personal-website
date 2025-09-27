@@ -1,10 +1,11 @@
 .header{
-  background: linear-gradient(90deg,#0f1724,#1b2a3a);
+  background: linear-gradient(90deg,#4d7a87,#005da8);
   color: #fff;
   padding: calc(var(--space-md) / 1.1) 0;
   position: sticky;
   top: 0;
   z-index: 40;
+  padding-top: 18px;
 }
 
 .header .header-inner{
@@ -12,6 +13,24 @@
   align-items: center;
   gap: var(--space-md);
   justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px; /* Optional: adds rounded corners */
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .brand .name{
@@ -28,6 +47,7 @@
   font-size: 1.05rem;
   color: rgba(255,255,255,0.9);
 }
+
 .main-nav{display:flex;gap:var(--space-sm)}
 .main-nav a{
   color: #cfe8ff;
@@ -40,12 +60,16 @@
 
 @media (max-width: 800px) {
   .header .header-inner{flex-direction:column;align-items:flex-start;gap:var(--space-sm)}
+  .brand{gap:0.75rem}
+  .title-logo{height:50px}
   .brand .name{font-size:1.5rem}
   .brand .title{font-size:0.95rem}
   .socials{margin-top:var(--space-sm)}
 }
 
 @media (max-width: 420px) {
+  .brand{flex-direction:column;align-items:flex-start;gap:0.5rem}
   .brand .name{font-size:1.25rem}
+  .title-logo{height:40px}
   .main-nav{width:100%;display:flex;justify-content:space-between}
 }
