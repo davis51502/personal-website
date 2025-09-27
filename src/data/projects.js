@@ -1,15 +1,15 @@
 const projects = [
   {
-    title: 'Portfolio Site',
-    description: 'A personal portfolio built with React showing projects and contact info.',
-    url: 'https://example.com',
-    repo: 'https://github.com/yourname/portfolio'
+    title: 'Realty Website',
+    description: 'A realtor website designed to showcase property listings and facilitate client interactions.',
+    url: 'https://suemckinleyrealtor.com',
+    repo: 'https://github.com/davis51502/suemckinleyrealtor'
   },
   {
-    title: 'Todo App',
-    description: 'A minimal todo app with localStorage and nice UX.',
-    url: '',
-    repo: 'https://github.com/yourname/todo-app'
+    title: 'Scrapbooking Website',
+    description: 'Scrapbooking website to share and preserve memories with friends and family.',
+    url: 'https://scrapbookimpressions.org',
+    repo: 'https://github.com/davis51502/scrapbooking-yeah'
   }
 ];
 

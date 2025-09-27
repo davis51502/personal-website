@@ -11,8 +11,28 @@ import projects, { socials } from './data/projects';
 function App() {
   const name = 'Davis Wollesen';
   const title = 'Software Engineer/Investment Analyst';
-  const bio = "I'm a Computer Science major involved in investment analytics.";
-  const skills = ['React', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Python', 'SQL', 'Git', 'Docker'];
+  
+  // Enhanced bio for investment analytics focus
+  const bio = "I'm a Computer Science major specializing in applying technical expertise to financial markets and investment strategies. With a strong foundation in software development and data analysis, I'm passionate about building data-driven solutions that uncover investment insights and optimize portfolio performance. My goal is to bridge the gap between cutting-edge technology and quantitative finance.";
+  
+  // Expanded skills list tailored for investment analytics
+  const skills = [
+    'Python',
+    'JavaScript', 
+    'React',
+    'Node.js',
+    'SQL & PostgreSQL',
+    'Data Analysis & Visualization',
+    'Financial Modeling',
+    'Statistical Analysis',
+    'Machine Learning',
+    'Pandas & NumPy',
+    'API Integration',
+    'Git & Docker',
+    'Quantitative Research',
+    'Portfolio Optimization',
+    'Risk Assessment'
+  ];
 
   const [activeSection, setActiveSection] = React.useState('about');
 
