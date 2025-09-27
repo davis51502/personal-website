@@ -59,7 +59,7 @@ a:hover {
 .layout {
   display: flex;
   align-items: flex-start;
-  max-width: 850px;   /* keep content from stretching too wide */
+  max-width: 890px;   /* keep content from stretching too wide */
   margin: 0 auto 0 400px;      /* center whole layout in viewport */
   padding: var(--space-lg);
 }
@@ -77,3 +77,130 @@ a:hover {
 
 
 
+/* ...existing code... */
+
+/* --- Improved layout + responsive rules for Sidebar --- */
+
+/* Default / desktop */
+.sidebar {
+  width: 260px;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--sidebar-bg, #fafafa);
+}
+.sidebar-inner {
+  text-align: center;
+  display: block;
+}
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 12px;
+  display: block;
+}
+.sidebar h3 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+.location,
+.email {
+  margin: 0 0 8px;
+  color: var(--muted, #666);
+  font-size: 0.95rem;
+}
+.sidebar-actions {
+  margin: 12px 0;
+}
+.resume-link {
+  display: inline-block;
+  padding: 8px 12px;
+  background: var(--primary, #0a84ff);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.sidebar-socials {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.sidebar-socials a {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* MOBILE: compact, single-row header style */
+@media (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    padding: 10px 12px;
+    position: relative;
+    display: block;
+    background: var(--sidebar-bg, #fff);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* make inner a horizontal layout */
+  .sidebar-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    flex: 0 0 48px;
+  }
+
+  .sidebar h3 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* hide less important text to save space */
+  .location,
+  .email {
+    display: none;
+  }
+
+  .sidebar-actions {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .resume-link {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+
+  /* push socials to the far right */
+  .sidebar-socials {
+    margin-left: auto;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar-socials a {
+    width: 36px;
+    height: 36px;
+  }
+}
