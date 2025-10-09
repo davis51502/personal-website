@@ -28,6 +28,7 @@ export default function Header({ name, title, socials, activeSection, onNavigate
         <nav className="main-nav">
           {link('about', 'About')}
           {link('projects', 'Projects')}
+          {link('blog', 'Blog')}
           {link('contact', 'Contact')}
         </nav>
         <nav className="socials">

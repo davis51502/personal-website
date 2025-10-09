@@ -1,100 +1,200 @@
-/* --- Main Sidebar Container --- */
+/* Sidebar Container */
 .sidebar {
-  background-color: #f8f9fa; /* A light, neutral background */
-  border-right: 1px solid #dee2e6;
-  padding: 2rem 1.5rem;
-  width: 280px; /* Fixed width for the sidebar */
-  height: 50vh; /* Make it full height */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  position: fixed; /* Keeps it in place on scroll */
-  top: 13rem;
-  left: 60px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.sidebar:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .sidebar-inner {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center all content horizontally */
+  align-items: center;
   text-align: center;
+  gap: 1rem;
 }
 
-/* --- Avatar/Photo --- */
+/* Avatar */
 .avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%; /* Makes the image circular */
-  object-fit: cover; /* Prevents image distortion */
-  margin-bottom: 1rem;
-  border: 4px solid #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f7fafc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
 }
 
-/* --- Typography --- */
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Typography */
 .sidebar h3 {
-  margin: 0.5rem 0 0.25rem;
-  font-size: 1.4rem;
+  margin: 0.5rem 0 0;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #212529;
+  color: #1a202c;
+  letter-spacing: -0.025em;
 }
 
-.sidebar p {
+.sidebar .location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   margin: 0.25rem 0;
-  color: #6c757d; /* Softer text color for details */
+  color: #718096;
   font-size: 0.95rem;
 }
 
+.sidebar .location::before {
+  content: "📍";
+  font-size: 1rem;
+}
+
+.sidebar .email {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
 .sidebar .email a {
-  color: #007bff; /* A nice accent color for the email link */
+  color: #3182ce;
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  transition: all 0.2s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }
 
 .sidebar .email a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  background: #e6f2ff;
+  color: #2c5282;
 }
 
-/* --- Action Button (Resume) --- */
-.sidebar-actions {
-  margin: 1.5rem 0;
+/* Divider */
+.sidebar-divider {
   width: 100%;
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0.5rem 0;
+}
+
+/* Action Buttons */
+.sidebar-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
 }
 
 .resume-link {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   width: 100%;
-  padding: 0.75rem 1.5rem;
-  background-color: #007bff;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
   border: none;
-  border-radius: 8px; /* Softer, rounded corners */
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  text-align: center;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .resume-link:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px); /* Slight lift on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-/* --- Social Media Links --- */
+.resume-link::after {
+  content: "→";
+  font-size: 1.1rem;
+}
+
+/* Social Links */
 .sidebar-socials {
-  margin-top: 1rem;
   display: flex;
-  gap: 1.5rem; /* Space out the social icons */
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 .sidebar-socials a {
-  color: #6c757d;
-  font-size: 1.5rem; /* Makes icons larger and easier to click */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  min-width: 100px;
+  background: #f7fafc;
+  color: #4a5568;
+  border-radius: 8px;
   text-decoration: none;
-  transition: color 0.2s ease-in-out, transform 0.2s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
 }
 
 .sidebar-socials a:hover {
-  color: #212529; /* Darken icon on hover */
-  transform: scale(1.1);
+  background: #3182ce;
+  color: #ffffff;
+  border-color: #3182ce;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(49, 130, 206, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .sidebar {
+    max-width: 100%;
+  }
+  
+  .sidebar-inner {
+    flex-direction: row;
+    text-align: left;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .sidebar h3 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    padding: 1.5rem;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .sidebar h3 {
+    font-size: 1.1rem;
+  }
+  
+  .sidebar .location,
+  .sidebar .email {
+    font-size: 0.85rem;
+  }
 }

@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
+import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
@@ -12,10 +13,8 @@ function App() {
   const name = 'Davis Wollesen';
   const title = 'Software Engineer/Investment Analyst';
   
-  // Enhanced bio for investment analytics focus
   const bio = "I'm a Computer Science major specializing in applying technical expertise to financial markets and investment strategies. With a strong foundation in software development and data analysis, I'm passionate about building data-driven solutions that uncover investment insights and optimize portfolio performance. My goal is to bridge the gap between cutting-edge technology and quantitative finance.";
   
-  // Expanded skills list tailored for investment analytics
   const skills = [
     'Python',
     'JavaScript', 
@@ -56,6 +55,7 @@ function App() {
         <main className="content">
           {activeSection === 'about' && <About bio={bio} skills={skills} />}
           {activeSection === 'projects' && <Projects projects={projects} />}
+          {activeSection === 'blog' && <Blog />}
           {activeSection === 'contact' && <Contact email="daviswollesen@gmail.com" />}
         </main>
       </div>

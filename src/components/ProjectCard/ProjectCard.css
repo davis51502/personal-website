@@ -1,4 +1,108 @@
-.project-card{background:#fff;border:1px solid #e6eef6;padding:var(--space-md);border-radius:10px}
-.project-card h4{margin:0 0 var(--space-sm)}
-.project-desc{color:var(--muted)}
-.project-links a{margin-right:var(--space-sm);color:var(--accent);text-decoration:none}
+/* ProjectCard.css */
+.project-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 2rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card:hover {
+  border-color: #cbd5e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.project-card h4 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.project-desc {
+  color: #718096;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* Live Demo Button - Primary Style */
+.project-links a[href*="http"]:not([href*="github"]) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.project-links a[href*="http"]:not([href*="github"]):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.project-links a[href*="http"]:not([href*="github"])::before {
+  content: "🚀";
+  font-size: 1rem;
+}
+
+/* Code/GitHub Button - Secondary Style */
+.project-links a[href*="github"] {
+  background: #ffffff;
+  color: #4a5568;
+  border: 2px solid #e2e8f0;
+}
+
+.project-links a[href*="github"]:hover {
+  background: #2d3748;
+  color: #ffffff;
+  border-color: #2d3748;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(45, 55, 72, 0.3);
+}
+
+.project-links a[href*="github"]::before {
+  content: "</>";
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    padding: 1.5rem;
+  }
+  
+  .project-card h4 {
+    font-size: 1.25rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+  }
+  
+  .project-links a {
+    width: 100%;
+    justify-content: center;
+  }
+}

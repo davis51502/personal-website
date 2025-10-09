@@ -8,10 +8,14 @@ export default function ProjectCard({ project }) {
       <p className="project-desc">{project.description}</p>
       <div className="project-links">
         {project.url && (
-          <a href={project.url} target="_blank" rel="noopener noreferrer">Live</a>
+          <a href={project.url} target="_blank" rel="noopener noreferrer">
+            Live Demo
+          </a>
         )}
         {project.repo && (
-          <a href={project.repo} target="_blank" rel="noopener noreferrer">Code</a>
+          <a href={project.repo} target="_blank" rel="noopener noreferrer">
+            View Code
+          </a>
         )}
       </div>
     </article>
