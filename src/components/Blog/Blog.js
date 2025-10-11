@@ -1,39 +1,42 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Blog.css';
+import blogPosts from '../../data/blogposts';
 
 export default function Blog() {
-  // Sample blog posts - you can move this to a data file later
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'Getting Started with Investment Analytics',
-      date: '2024-03-15',
-      excerpt: 'An introduction to using data science techniques for investment analysis...',
-      content: 'Full blog post content here...'
-    },
-    {
-      id: 2,
-      title: 'Building My Portfolio Website',
-      date: '2024-02-20',
-      excerpt: 'Lessons learned while creating a React-based portfolio site...',
-      content: 'Full blog post content here...'
-    }
-  ];
+  // Sort posts by date (newest first)
+  const sortedPosts = [...blogPosts].sort((a, b) => 
+    new Date(b.date) - new Date(a.date)
+  );
 
   return (
-    <section id="blog" className="blog container">
-      <h2>Blog</h2>
-      <div className="blog-grid">
-        {blogPosts.map(post => (
-          <article key={post.id} className="blog-post">
+    <section id="blog" className="blog">
+      <div className="blog-header">
+
+        <p className="blog-subtitle">Thoughts on software, finance, and technology</p>
+      </div>
+
+      {/* Blog Posts List */}
+      <div className="blog-list">
+        {sortedPosts.map(post => (
+          <article key={post.id} className="blog-card">
+            <div className="blog-meta">
+              <time className="blog-date">
+                {new Date(post.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </time>
+              {post.category && <span className="blog-category">{post.category}</span>}
+            </div>
+            
             <h3>{post.title}</h3>
-            <time className="blog-date">{new Date(post.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}</time>
             <p className="blog-excerpt">{post.excerpt}</p>
-            <a href={`#blog-${post.id}`} className="read-more">Read more →</a>
+            
+            <Link to={`/blog/${post.id}`} className="read-more">
+              Read more →
+            </Link>
           </article>
         ))}
       </div>

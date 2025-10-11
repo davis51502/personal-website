@@ -1,19 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export default function Header({ name, title, socials, activeSection, onNavigate }) {
-  const link = (id, label) => (
-    <a
-      href={`#${id}`}
-      className={activeSection === id ? 'active' : ''}
-      onClick={(e) => {
-        e.preventDefault();
-        onNavigate(id);
-      }}
-    >
-      {label}
-    </a>
-  );
+  const navLink = (id, label) => {
+    const path = id === 'about' ? '/' : `/${id}`;
+    return (
+      <Link
+        to={path}
+        className={activeSection === id ? 'active' : ''}
+        onClick={() => onNavigate(id)}
+      >
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <header className="header">
@@ -26,10 +27,10 @@ export default function Header({ name, title, socials, activeSection, onNavigate
           </div>
         </div>
         <nav className="main-nav">
-          {link('about', 'About')}
-          {link('projects', 'Projects')}
-          {link('blog', 'Blog')}
-          {link('contact', 'Contact')}
+          {navLink('about', 'About')}
+          {navLink('projects', 'Projects')}
+          {navLink('blog', 'Blog')}
+          {navLink('contact', 'Contact')}
         </nav>
         <nav className="socials">
           {socials.map(s => (

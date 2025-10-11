@@ -81,6 +81,14 @@ a:hover {
   min-width: 0; /* Prevents overflow */
 }
 
+/* Full-width content (no sidebar) for blog pages */
+.content-full {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: var(--space-lg);
+  width: 100%;
+}
+
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .layout {
@@ -99,11 +107,16 @@ a:hover {
   .layout .content {
     width: 100%;
   }
+  
+  .content-full {
+    padding: var(--space-md);
+  }
 }
 
 @media (max-width: 600px) {
   .container,
-  .layout {
+  .layout,
+  .content-full {
     padding: var(--space-md);
   }
 }
