@@ -12,7 +12,7 @@ export default function Blog() {
   return (
     <section id="blog" className="blog">
       <div className="blog-header">
-
+        <h1 className="blog-title">Blog</h1>
         <p className="blog-subtitle">Thoughts on software, finance, and technology</p>
       </div>
 

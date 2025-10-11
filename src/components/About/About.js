@@ -4,7 +4,7 @@ import './About.css';
 export default function About({ bio, skills = [] }) {
   return (
     <section id="about" className="about">
-      <h2 className="section-title">About</h2>
+      <h2 className="section-title">About Me</h2>
       <p className="bio">{bio}</p>
 
       <div className="skills">

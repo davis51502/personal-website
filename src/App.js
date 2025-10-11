@@ -59,6 +59,13 @@ function MainContent() {
       <Header name={name} title={title} socials={socials} activeSection={activeSection} onNavigate={handleNavigate} />
       
       <Routes>
+        {/* Projects route WITHOUT sidebar */}
+        <Route path="/projects" element={
+          <main className="content-full">
+            <Projects projects={projects} />
+          </main>
+        } />
+        
         {/* Blog routes WITHOUT sidebar */}
         <Route path="/blog" element={
           <main className="content-full">
@@ -74,8 +81,8 @@ function MainContent() {
           </main>
         } />
         
-        {/* Other routes WITH sidebar */}
-        <Route path="*" element={
+        {/* About route WITH sidebar */}
+        <Route path="/" element={
           <div className="layout container">
             <Sidebar
               name={name}
@@ -85,10 +92,7 @@ function MainContent() {
               photo="/IMG_0922.jpeg"
             />
             <main className="content">
-              <Routes>
-                <Route path="/" element={<About bio={bio} skills={skills} />} />
-                <Route path="/projects" element={<Projects projects={projects} />} />
-              </Routes>
+              <About bio={bio} skills={skills} />
             </main>
           </div>
         } />
