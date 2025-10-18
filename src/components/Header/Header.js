@@ -29,7 +29,7 @@ export default function Header({ name, title, socials, activeSection, onNavigate
         <nav className="main-nav">
           {navLink('about', 'About')}
           {navLink('projects', 'Projects')}
-          {navLink('blog', 'Blog')}
+          {navLink('blog', 'Reviews')}
           {navLink('contact', 'Contact')}
         </nav>
         <nav className="socials">

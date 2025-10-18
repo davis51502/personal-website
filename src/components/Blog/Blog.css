@@ -12,7 +12,7 @@
   margin-bottom: 3rem;
 }
 
-.blog-header h2 {
+.blog-header h1 {
   font-size: 2.5rem;
   font-weight: 600;
   color: #1a202c;
@@ -23,6 +23,27 @@
   font-size: 1.125rem;
   color: #718096;
   margin: 0;
+}
+
+/* Loading & Error States */
+.loading,
+.error,
+.no-posts {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #718096;
+  font-size: 1.125rem;
+}
+
+.error {
+  color: #e53e3e;
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+}
+
+.loading {
+  color: #3182ce;
 }
 
 /* Blog List */
@@ -111,7 +132,7 @@
     padding: 3rem 1rem;
   }
   
-  .blog-header h2 {
+  .blog-header h1 {
     font-size: 2rem;
   }
   

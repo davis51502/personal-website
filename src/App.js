@@ -6,7 +6,6 @@ import Sidebar from './components/Sidebar/Sidebar';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Blog from './components/Blog/Blog';
-import BlogPost from './components/BlogPost/BlogPost';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
@@ -72,7 +71,7 @@ function MainContent() {
             <Blog />
           </main>
         } />
-        <Route path="/blog/:id" element={<BlogPost />} />
+
         
         {/* Contact route WITHOUT sidebar */}
         <Route path="/contact" element={
