@@ -7,25 +7,38 @@ export default function Blog() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        setLoading(true);
-        const mediumPosts = await fetchMediumPosts();
-        setPosts(mediumPosts);
-      } catch (err) {
-        setError('Failed to load blog posts');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+  // Function to load posts
+  const loadPosts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const mediumPosts = await fetchMediumPosts();
+      setPosts(mediumPosts);
+      setLastUpdated(new Date());
+    } catch (err) {
+      setError('Failed to load blog posts');
+      console.error(err);
+    } finally {
+      setLoading(false);
+      setIsRefreshing(false);
     }
+  };
 
+  // Load posts on mount
+  useEffect(() => {
     loadPosts();
   }, []);
 
-  if (loading) {
+  // Manual refresh handler
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    loadPosts();
+  };
+
+  if (loading && !isRefreshing) {
     return (
       <section id="blog" className="blog">
         <div className="blog-header">
@@ -37,7 +50,7 @@ export default function Blog() {
     );
   }
 
-  if (error) {
+  if (error && !isRefreshing) {
     return (
       <section id="blog" className="blog">
         <div className="blog-header">
@@ -54,6 +67,32 @@ export default function Blog() {
       <div className="blog-header">
         <h1 className="blog-title">Reviews</h1>
         <p className="blog-subtitle">Thoughts on software, finance, and technology</p>
+        
+        {/* Refresh Controls */}
+        <div className="blog-controls">
+          <button 
+            onClick={handleRefresh} 
+            className="refresh-button"
+            disabled={isRefreshing}
+          >
+            {isRefreshing ? (
+              <>
+                <span className="spinner"></span>
+                Refreshing...
+              </>
+            ) : (
+              <>
+                <span className="refresh-icon">↻</span>
+                Refresh Posts
+              </>
+            )}
+          </button>
+          {lastUpdated && !isRefreshing && (
+            <p className="last-updated">
+              Last updated: {lastUpdated.toLocaleTimeString()}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Blog Posts List */}
