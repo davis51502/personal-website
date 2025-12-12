@@ -1,4 +1,10 @@
 const projects = [
+    {
+    title: 'Proyak',
+    description: 'Professional Job Board that uses verified credentials to connect employers with qualified candidates and create perfect matches.',
+    url: 'https://proyak.click',
+    repo: 'https://github.com/davis51502/proyak'
+  },
   {
     title: 'Realty Website',
     description: 'A realtor website designed to showcase property listings and facilitate client interactions.',
@@ -11,6 +17,8 @@ const projects = [
     url: 'https://scrapbookimpressions.org',
     repo: 'https://github.com/davis51502/scrapbooking-yeah'
   }
+  
+
 ];
 
 export const socials = [
