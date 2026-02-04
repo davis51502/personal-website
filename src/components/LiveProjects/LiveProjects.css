@@ -1,0 +1,20 @@
+.liveprojects {
+  padding: 2rem 0;
+}
+
+.live-intro {
+  margin-bottom: 1rem;
+  color: var(--muted, #666);
+}
+
+.live-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .live-grid {
+    grid-template-columns: 1fr;
+  }
+}
