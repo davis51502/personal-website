@@ -5,12 +5,10 @@ import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
-import LiveProjects from './components/LiveProjects/LiveProjects';
 import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
-import liveProjects from './data/liveProjects';
 
 function MainContent() {
   const name = 'Davis Wollesen';
@@ -45,7 +43,6 @@ function MainContent() {
     if (path === '/') return 'about';
     if (path.startsWith('/blog')) return 'blog';
     if (path === '/projects') return 'projects';
-      if (path === '/liveprojects') return 'liveprojects';
     if (path === '/contact') return 'contact';
     return 'about';
   };
@@ -68,13 +65,6 @@ function MainContent() {
           </main>
         } />
 
-        {/* Live Projects route WITHOUT sidebar */}
-        <Route path="/liveprojects" element={
-          <main className="content-full">
-            <LiveProjects projects={liveProjects} />
-          </main>
-        } />
-        
         {/* Blog routes WITHOUT sidebar */}
         <Route path="/blog" element={
           <main className="content-full">
