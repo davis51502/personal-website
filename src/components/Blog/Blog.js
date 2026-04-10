@@ -20,6 +20,7 @@ export default function Blog() {
       setLastUpdated(new Date());
     } catch (err) {
       setError('Failed to load blog posts');
+      setPosts([]);
       console.error(err);
     } finally {
       setLoading(false);

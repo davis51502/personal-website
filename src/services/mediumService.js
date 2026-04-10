@@ -6,79 +6,38 @@
 
 const MEDIUM_USERNAME = 'Daviswollesen';
 const MEDIUM_RSS_URL = `https://medium.com/feed/@${MEDIUM_USERNAME}`;
-const ALL_ORIGINS_API = 'https://api.allorigins.win/get';
+const RSS_TO_JSON_API = 'https://api.rss2json.com/v1/api.json';
 
 export async function fetchMediumPosts() {
-  const cacheBuster = Date.now();
-  const proxiedFeedUrl =
-    `${ALL_ORIGINS_API}?url=${encodeURIComponent(MEDIUM_RSS_URL)}&cacheBust=${cacheBuster}`;
+  const cacheBustedFeedUrl = `${MEDIUM_RSS_URL}?cachebust=${Date.now()}`;
+  const requestUrl =
+    `${RSS_TO_JSON_API}?rss_url=${encodeURIComponent(cacheBustedFeedUrl)}`;
 
-  try {
-    const response = await fetch(proxiedFeedUrl, {
-      headers: {
-        Accept: 'application/json'
-      }
-    });
+  const response = await fetch(requestUrl);
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch Medium RSS: ${response.status}`);
-    }
-
-    const payload = await response.json();
-    const rssContent = payload.contents;
-
-    if (!rssContent) {
-      throw new Error('Medium RSS response was empty');
-    }
-
-    return parseMediumRss(rssContent);
-  } catch (error) {
-    console.error('Error fetching Medium posts:', error);
-    return [];
-  }
-}
-
-function parseMediumRss(rssContent) {
-  const parser = new DOMParser();
-  const rssDocument = parser.parseFromString(rssContent, 'text/xml');
-  const parserError = rssDocument.querySelector('parsererror');
-
-  if (parserError) {
-    throw new Error('Unable to parse Medium RSS feed');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Medium posts: ${response.status}`);
   }
 
-  const items = Array.from(rssDocument.querySelectorAll('item'));
+  const data = await response.json();
 
-  return items
-    .map((item, index) => {
-      const title = getTextContent(item, 'title');
-      const date = getTextContent(item, 'pubDate');
-      const url = getTextContent(item, 'link');
-      const author = getTextContent(item, 'dc\\:creator, creator');
-      const categories = Array.from(item.querySelectorAll('category'))
-        .map(category => category.textContent?.trim())
-        .filter(Boolean);
-      const htmlContent =
-        getTextContent(item, 'content\\:encoded, encoded') ||
-        getTextContent(item, 'description');
+  if (data.status !== 'ok' || !Array.isArray(data.items)) {
+    throw new Error('RSS feed error');
+  }
 
-      return {
-        id: getTextContent(item, 'guid') || `${url}-${index}`,
-        title,
-        date,
-        category: extractCategory(categories),
-        excerpt: extractExcerpt(htmlContent),
-        url,
-        thumbnail: extractThumbnail(htmlContent),
-        author
-      };
-    })
+  return data.items
+    .map((item, index) => ({
+      id: item.guid || item.link || `medium-post-${index}`,
+      title: item.title,
+      date: item.pubDate,
+      category: extractCategory(item.categories),
+      excerpt: extractExcerpt(item.description || item.content),
+      url: item.link,
+      thumbnail: item.thumbnail || extractThumbnail(item.description || item.content),
+      author: item.author
+    }))
     .filter(post => post.title && post.url)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-
-function getTextContent(parent, selector) {
-  return parent.querySelector(selector)?.textContent?.trim() || '';
 }
 
 /**
