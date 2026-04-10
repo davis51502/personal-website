@@ -4,45 +4,81 @@
  * Service to fetch and parse Medium blog posts via RSS feed
  */
 
-// Replace with your Medium username
 const MEDIUM_USERNAME = 'Daviswollesen';
 const MEDIUM_RSS_URL = `https://medium.com/feed/@${MEDIUM_USERNAME}`;
-
-// We'll use RSS2JSON service to convert Medium RSS to JSON
-const RSS_TO_JSON_API = 'https://api.rss2json.com/v1/api.json';
+const ALL_ORIGINS_API = 'https://api.allorigins.win/get';
 
 export async function fetchMediumPosts() {
+  const cacheBuster = Date.now();
+  const proxiedFeedUrl =
+    `${ALL_ORIGINS_API}?url=${encodeURIComponent(MEDIUM_RSS_URL)}&cacheBust=${cacheBuster}`;
+
   try {
-    const response = await fetch(
-      `${RSS_TO_JSON_API}?rss_url=${encodeURIComponent(MEDIUM_RSS_URL)}`
-    );
-    
+    const response = await fetch(proxiedFeedUrl, {
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+
     if (!response.ok) {
-      throw new Error('Failed to fetch Medium posts');
+      throw new Error(`Failed to fetch Medium RSS: ${response.status}`);
     }
-    
-    const data = await response.json();
-    
-    if (data.status !== 'ok') {
-      throw new Error('RSS feed error');
+
+    const payload = await response.json();
+    const rssContent = payload.contents;
+
+    if (!rssContent) {
+      throw new Error('Medium RSS response was empty');
     }
-    
-    // Transform Medium posts to match our blog post structure
-    return data.items.map((item, index) => ({
-      id: index + 1,
-      title: item.title,
-      date: item.pubDate,
-      category: extractCategory(item.categories),
-      excerpt: extractExcerpt(item.description),
-      url: item.link, // Link to Medium article
-      thumbnail: item.thumbnail,
-      author: item.author
-    }));
-    
+
+    return parseMediumRss(rssContent);
   } catch (error) {
     console.error('Error fetching Medium posts:', error);
     return [];
   }
+}
+
+function parseMediumRss(rssContent) {
+  const parser = new DOMParser();
+  const rssDocument = parser.parseFromString(rssContent, 'text/xml');
+  const parserError = rssDocument.querySelector('parsererror');
+
+  if (parserError) {
+    throw new Error('Unable to parse Medium RSS feed');
+  }
+
+  const items = Array.from(rssDocument.querySelectorAll('item'));
+
+  return items
+    .map((item, index) => {
+      const title = getTextContent(item, 'title');
+      const date = getTextContent(item, 'pubDate');
+      const url = getTextContent(item, 'link');
+      const author = getTextContent(item, 'dc\\:creator, creator');
+      const categories = Array.from(item.querySelectorAll('category'))
+        .map(category => category.textContent?.trim())
+        .filter(Boolean);
+      const htmlContent =
+        getTextContent(item, 'content\\:encoded, encoded') ||
+        getTextContent(item, 'description');
+
+      return {
+        id: getTextContent(item, 'guid') || `${url}-${index}`,
+        title,
+        date,
+        category: extractCategory(categories),
+        excerpt: extractExcerpt(htmlContent),
+        url,
+        thumbnail: extractThumbnail(htmlContent),
+        author
+      };
+    })
+    .filter(post => post.title && post.url)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+function getTextContent(parent, selector) {
+  return parent.querySelector(selector)?.textContent?.trim() || '';
 }
 
 /**
@@ -57,13 +93,24 @@ function extractCategory(categories) {
  * Extract plain text excerpt from HTML description
  */
 function extractExcerpt(html) {
-  // Remove HTML tags
-  const text = html.replace(/<[^>]*>/g, '');
-  
-  // Limit to ~150 characters
+  if (!html) return '';
+
+  const parser = new DOMParser();
+  const document = parser.parseFromString(html, 'text/html');
+  const text = document.body.textContent?.replace(/\s+/g, ' ').trim() || '';
+
   if (text.length > 150) {
     return text.substring(0, 150).trim() + '...';
   }
-  
+
   return text;
+}
+
+function extractThumbnail(html) {
+  if (!html) return '';
+
+  const parser = new DOMParser();
+  const document = parser.parseFromString(html, 'text/html');
+
+  return document.querySelector('img')?.getAttribute('src') || '';
 }
