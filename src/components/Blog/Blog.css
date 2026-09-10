@@ -5,12 +5,8 @@
 }
 
 .blog-header {
-  margin-bottom: 2.5rem;
-  padding: 2rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-card-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+  margin-bottom: 2rem;
+  padding: 0;
 }
 
 .blog-header h1 {
@@ -32,21 +28,18 @@
 .refresh-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-heading);
-  color: #ffffff;
-  border: 1px solid var(--color-heading);
-  border-radius: var(--radius-sm);
+  gap: 0.4rem;
+  padding: 0;
+  background: none;
+  color: var(--color-heading);
+  border: 0;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .refresh-button:hover:not(:disabled) {
-  background: #1f2937;
-  border-color: #1f2937;
+  color: var(--color-accent);
 }
 
 .refresh-button:disabled {
@@ -67,8 +60,8 @@
 .spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #ffffff;
+  border: 2px solid rgba(17, 24, 39, 0.15);
+  border-top-color: var(--color-heading);
   border-radius: 50%;
   display: inline-block;
   animation: spin 0.8s linear infinite;
@@ -114,17 +107,16 @@
 }
 
 .blog-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-card-border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: var(--shadow-soft);
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  border-radius: 0;
+  padding: 1.35rem 0 0.2rem;
+  box-shadow: none;
 }
 
 .blog-card:hover {
-  box-shadow: var(--shadow-card);
-  border-color: #c3ccd6;
+  box-shadow: none;
 }
 
 .blog-meta {
@@ -141,16 +133,9 @@
 }
 
 .blog-category {
-  display: inline-block;
-  padding: 0.2rem 0.625rem;
-  background: #f8fafc;
   color: var(--color-muted);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-card-border);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 
 .blog-card h3 {
@@ -188,16 +173,12 @@
     padding-bottom: 3rem;
   }
 
-  .blog-header {
-    padding: 1.5rem;
-  }
-
   .blog-list {
     gap: 1.25rem;
   }
 
   .blog-card {
-    padding: 1.25rem;
+    padding-top: 1.15rem;
   }
 
   .blog-card h3 {
@@ -209,7 +190,6 @@
   }
 
   .refresh-button {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
   }
 }
