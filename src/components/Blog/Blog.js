@@ -43,7 +43,7 @@ export default function Blog() {
     return (
       <section id="blog" className="blog">
         <div className="blog-header">
-          <h1 className="blog-title">Reviews</h1>
+          <h1 className="blog-title">Writing</h1>
           <p className="blog-subtitle">Thoughts on software, finance, and technology</p>
         </div>
         <div className="loading">Loading posts...</div>
@@ -55,7 +55,7 @@ export default function Blog() {
     return (
       <section id="blog" className="blog">
         <div className="blog-header">
-          <h1 className="blog-title">Reviews</h1>
+          <h1 className="blog-title">Writing</h1>
           <p className="blog-subtitle">Thoughts on software, finance, and technology</p>
         </div>
         <div className="error">{error}</div>
@@ -66,7 +66,7 @@ export default function Blog() {
   return (
     <section id="blog" className="blog">
       <div className="blog-header">
-        <h1 className="blog-title">Reviews</h1>
+        <h1 className="blog-title">Writing</h1>
         <p className="blog-subtitle">Thoughts on software, finance, and technology</p>
         
         {/* Refresh Controls */}

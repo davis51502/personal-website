@@ -24,11 +24,16 @@
   gap: 0.6rem;
   min-width: 0;
   flex-shrink: 0;
+  color: var(--color-heading);
+}
+
+.brand:hover {
+  color: var(--color-heading);
 }
 
 .title-logo {
-  height: 28px;
-  width: 28px;
+  height: 30px;
+  width: 30px;
   object-fit: contain;
   padding: 2px;
   background: #fff;
@@ -45,64 +50,152 @@
 }
 
 .brand .name {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 .brand .title {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--color-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* ---- Desktop nav ---- */
+
 .main-nav {
   display: flex;
-  gap: 1.6rem;
-  min-width: 0;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .main-nav a {
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: var(--color-heading);
-  opacity: 0.72;
+  padding: 0.45rem 0.75rem;
+  border-radius: 980px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-muted);
   white-space: nowrap;
-  transition: opacity var(--transition-fast);
+  transition: color var(--transition-fast), background var(--transition-fast);
 }
 
 .main-nav a:hover,
 .main-nav a:focus-visible {
   color: var(--color-heading);
-  opacity: 1;
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .main-nav a.active {
-  opacity: 1;
+  color: var(--color-heading);
+  background: rgba(0, 0, 0, 0.06);
   font-weight: 600;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .brand .title {
-    display: none;
-  }
-
-  /* One row on phones: the nav scrolls sideways instead of wrapping. */
-  .main-nav {
-    gap: 1.1rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .main-nav::-webkit-scrollbar {
     display: none;
   }
 }
 
-@media (max-width: 420px) {
-  .brand-text {
+/* ---- Phone menu ---- */
+
+.menu-toggle {
+  display: none;
+  appearance: none;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-icon,
+.menu-icon::before {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--color-heading);
+  border-radius: 1px;
+  transition: transform 0.25s ease;
+}
+
+.menu-icon {
+  position: relative;
+  transform: translateY(-3.5px);
+}
+
+.menu-icon::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+}
+
+.menu-open .menu-icon {
+  transform: translateY(0) rotate(45deg);
+}
+
+.menu-open .menu-icon::before {
+  transform: translateY(-7px) rotate(-90deg);
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .main-nav {
     display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .mobile-menu:not([hidden]) {
+    display: grid;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    padding: 0.5rem 1.5rem 1.5rem;
+    background: rgba(251, 251, 253, 0.97);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+    animation: menu-in 0.2s ease;
+  }
+
+  .mobile-menu a {
+    padding: 0.8rem 0;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-heading);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-menu a.active {
+    color: var(--color-accent);
+  }
+}
+
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu:not([hidden]) {
+    animation: none;
   }
 }

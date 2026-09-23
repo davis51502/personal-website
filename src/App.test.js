@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import App from './App';
 
 beforeEach(() => {
@@ -33,4 +33,23 @@ test('AI page replays text-to-SQL runs, including a blocked one', async () => {
   expect(screen.getByRole('heading', { name: /ai in practice/i })).toBeInTheDocument();
   fireEvent.click(screen.getByRole('button', { name: /ceo of telsa/i }));
   expect(await screen.findByText(/blocked/i)).toBeInTheDocument();
+});
+
+test('each nav click adds exactly one history entry', () => {
+  render(<App />);
+  const primary = screen.getByRole('navigation', { name: 'Primary' });
+  const before = window.history.length;
+  fireEvent.click(within(primary).getByRole('link', { name: 'Projects' }));
+  expect(window.history.length).toBe(before + 1);
+  expect(within(primary).getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
+});
+
+test('phone menu opens and closes after choosing a page', () => {
+  render(<App />);
+  const toggle = screen.getByRole('button', { name: /open menu/i });
+  fireEvent.click(toggle);
+  expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  const menu = screen.getByRole('navigation', { name: 'Mobile' });
+  fireEvent.click(within(menu).getByRole('link', { name: 'Writing' }));
+  expect(screen.getByRole('button', { name: /open menu/i })).toHaveAttribute('aria-expanded', 'false');
 });

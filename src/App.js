@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import About from './components/About/About';
@@ -31,7 +31,6 @@ function MainContent() {
     },
   ];
 
-  const navigate = useNavigate();
   const location = useLocation();
   
   const getActiveSection = () => {
@@ -45,10 +44,6 @@ function MainContent() {
     return 'about';
   };
 
-  const handleNavigate = (id) => {
-    navigate(`/${id === 'about' ? '' : id}`);
-  };
-
   const activeSection = getActiveSection();
 
   // Start each page at the top instead of keeping the previous page's scroll.
@@ -58,7 +53,7 @@ function MainContent() {
 
   return (
     <div className="App">
-      <Header name={name} title={title} activeSection={activeSection} onNavigate={handleNavigate} />
+      <Header name={name} title={title} activeSection={activeSection} />
       
       <Routes>
         <Route path="/projects" element={
@@ -109,7 +104,7 @@ function MainContent() {
         } />
       </Routes>
       
-      <Footer />
+      <Footer socials={socials} />
     </div>
   );
 }
