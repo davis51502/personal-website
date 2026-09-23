@@ -4,4 +4,5 @@
   margin-top: var(--space-xl);
   text-align: center;
   color: var(--color-muted);
+  font-size: 0.75rem;
 }

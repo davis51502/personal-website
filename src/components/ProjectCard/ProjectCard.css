@@ -1,18 +1,19 @@
 .project-card {
-  background: transparent;
+  background: var(--color-surface);
   border: 0;
-  border-top: 1px solid var(--color-line);
-  padding: 1.5rem 0 0.35rem;
-  border-radius: 0;
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   height: 100%;
   box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
-  box-shadow: none;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
 }
 
 .project-copy {
@@ -23,8 +24,9 @@
 .project-card h4 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--color-heading);
   line-height: 1.2;
 }
@@ -75,15 +77,20 @@
   padding: 0;
   border-radius: 0;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 400;
+  font-size: 0.95rem;
   color: var(--color-accent);
   background: none;
   border: 0;
 }
 
+.project-links a::after {
+  content: ' ›';
+}
+
 .project-links a:hover {
-  color: var(--color-accent-strong);
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 .project-links a[href*="http"]:not([href*="github"]) {
@@ -110,12 +117,12 @@
 
 .project-links a[href*="github"]:hover {
   background: none;
-  color: var(--color-accent-strong);
+  color: var(--color-accent);
 }
 
 @media (max-width: 768px) {
   .project-card {
-    padding-top: 1.25rem;
+    padding: 1.4rem;
   }
 
   .project-card h4 {

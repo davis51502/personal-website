@@ -5,26 +5,27 @@
   --space-lg: 1.5rem;
   --space-xl: 2.5rem;
   --space-2xl: 4rem;
-  --container-width: 1200px;
-  --font-body: 'Avenir Next', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: Georgia, 'Times New Roman', serif;
-  --color-text: #1f2937;
-  --color-heading: #111827;
-  --color-muted: #5b6472;
-  --color-accent: #0f3d6e;
-  --color-accent-strong: #0a2b4e;
-  --color-accent-soft: #e7edf4;
+  --container-width: 1080px;
+  --header-height: 52px;
+  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --color-text: #1d1d1f;
+  --color-heading: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-accent: #0071e3;
+  --color-accent-strong: #0062c4;
+  --color-accent-soft: #e8f2fd;
   --color-surface: #ffffff;
   --color-surface-strong: #ffffff;
-  --color-card-border: #d8dee6;
-  --color-line: #d3dbe4;
-  --color-bg: #f5f5f2;
-  --shadow-soft: 0 10px 24px rgba(17, 24, 39, 0.04);
-  --shadow-card: 0 16px 32px rgba(17, 24, 39, 0.06);
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --transition-fast: 0.18s ease;
+  --color-card-border: #d2d2d7;
+  --color-line: #d2d2d7;
+  --color-bg: #f5f5f7;
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 8px 28px rgba(0, 0, 0, 0.08);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --transition-fast: 0.2s ease;
 }
 
 *,
@@ -38,8 +39,10 @@
 body {
   font-family: var(--font-body);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
   background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
 
@@ -77,7 +80,7 @@ select {
 .content-full {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: var(--space-lg) var(--space-lg) 0;
+  padding: 3rem var(--space-lg) 0;
   width: 100%;
 }
 
@@ -92,9 +95,10 @@ select {
 .blog-title,
 .contact h2 {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 4vw, 3rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.07;
+  letter-spacing: -0.03em;
   color: var(--color-heading);
 }
 
@@ -110,7 +114,8 @@ select {
 .bio,
 .contact p {
   color: var(--color-muted);
-  font-size: 1.05rem;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.45;
   max-width: 760px;
 }
 

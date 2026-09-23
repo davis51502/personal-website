@@ -85,9 +85,8 @@
   color: var(--color-muted);
   font-size: 1.125rem;
   background: var(--color-surface);
-  border: 1px solid var(--color-card-border);
+  border: 0;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
 }
 
 .error {
@@ -103,15 +102,14 @@
 .blog-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .blog-card {
-  background: none;
+  background: var(--color-surface);
   border: 0;
-  border-top: 1px solid var(--color-line);
-  border-radius: 0;
-  padding: 1.35rem 0 0.2rem;
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.75rem;
   box-shadow: none;
 }
 
