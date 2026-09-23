@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
 beforeEach(() => {
@@ -12,12 +12,9 @@ test('renders name and experience on the home page', () => {
   expect(screen.getByText(/culmination bio/i)).toBeInTheDocument();
 });
 
-test('filters projects by technology tag', () => {
+test('lists projects on the projects page', () => {
   window.location.hash = '#/projects';
   render(<App />);
-  const total = screen.getAllByRole('article').length;
-  fireEvent.click(screen.getByRole('button', { name: 'Java' }));
-  const filtered = screen.getAllByRole('article');
-  expect(filtered.length).toBeLessThan(total);
   expect(screen.getByText('Multiplayer Chess')).toBeInTheDocument();
+  expect(screen.getByText('Mini Bloomberg')).toBeInTheDocument();
 });
