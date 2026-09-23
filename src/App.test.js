@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 
 beforeEach(() => {
@@ -17,4 +17,12 @@ test('lists projects on the projects page', () => {
   render(<App />);
   expect(screen.getByText('Multiplayer Chess')).toBeInTheDocument();
   expect(screen.getByText('Mini Bloomberg')).toBeInTheDocument();
+});
+
+test('hobbies page shows tiles and the penalty game', () => {
+  window.location.hash = '#/hobbies';
+  render(<App />);
+  expect(screen.getByRole('tab', { name: /guitar/i })).toHaveAttribute('aria-selected', 'true');
+  fireEvent.click(screen.getByRole('tab', { name: /soccer/i }));
+  expect(screen.getByRole('button', { name: /shoot left/i })).toBeInTheDocument();
 });

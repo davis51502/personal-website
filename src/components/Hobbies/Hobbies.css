@@ -1,0 +1,329 @@
+.hobbies {
+  padding: 0.5rem 0 var(--space-2xl);
+}
+
+/* ---- Tiles ---- */
+
+.hobby-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hobby-tile {
+  appearance: none;
+  display: grid;
+  justify-items: start;
+  gap: 0.2rem;
+  padding: 1.1rem 1.1rem 1rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hobby-tile:hover,
+.hobby-tile:focus-visible {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.hobby-tile.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.hobby-icon {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  margin-bottom: 0.4rem;
+}
+
+.hobby-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.hobby-tagline {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+/* ---- Panel ---- */
+
+.hobby-panel {
+  padding: 1.5rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  animation: hobby-in 220ms ease;
+}
+
+@keyframes hobby-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.hobby-blurb {
+  max-width: 44rem;
+  color: var(--color-muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.hobby-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-top: 1rem;
+}
+
+.hobby-button {
+  appearance: none;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hobby-button:hover:not(:disabled) {
+  background: var(--color-accent-strong);
+}
+
+.hobby-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.hobby-hint {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* ---- Guitar ---- */
+
+.guitar {
+  margin-top: 1.25rem;
+}
+
+.guitar-neck {
+  display: grid;
+  gap: 0;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 calc(14% - 3px), #bfa77f calc(14% - 3px) 14%),
+    linear-gradient(180deg, #5a3a22, #3f2716);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.guitar-string {
+  appearance: none;
+  display: grid;
+  grid-template-columns: 1.4rem 1fr;
+  align-items: center;
+  height: 2.1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.string-note {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #f2e6d4;
+}
+
+.string-line {
+  height: var(--thickness);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #f4efe6, #b9ad98);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  transform-origin: center;
+}
+
+.guitar-string:hover .string-line,
+.guitar-string:focus-visible .string-line {
+  background: linear-gradient(180deg, #fff6df, #e0c58f);
+}
+
+.guitar-string.ringing .string-line {
+  animation: string-vibrate 90ms linear 6;
+}
+
+@keyframes string-vibrate {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-2px); }
+  75% { transform: translateY(2px); }
+}
+
+/* ---- Penalty kick ---- */
+
+.penalty {
+  margin-top: 1.25rem;
+}
+
+.penalty-scoreboard {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.penalty-scoreboard strong {
+  color: var(--color-heading);
+}
+
+.penalty-pitch {
+  position: relative;
+  height: 300px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: repeating-linear-gradient(180deg, #3f8f4a 0 36px, #378242 36px 72px);
+}
+
+.penalty-goal {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  width: min(420px, 82%);
+  height: 140px;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 5px solid #fff;
+  border-bottom: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.22) 0 1px, transparent 1px 14px),
+    rgba(0, 0, 0, 0.12);
+}
+
+.penalty-zone {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: crosshair;
+  transition: background var(--transition-fast);
+}
+
+.penalty-zone:hover:not(:disabled),
+.penalty-zone:focus-visible {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.penalty-zone:disabled {
+  cursor: default;
+}
+
+.penalty-keeper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 34px;
+  height: 78px;
+  margin-left: -17px;
+  border-radius: 14px 14px 4px 4px;
+  background: #f5b700;
+  box-shadow: inset 0 -26px 0 #1f2937;
+  pointer-events: none;
+  transition: transform 380ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.penalty-keeper::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  border-radius: 50%;
+  background: #e8b58c;
+}
+
+.penalty-keeper.dive-left { transform: translateX(-280%) rotate(-62deg); }
+.penalty-keeper.dive-right { transform: translateX(280%) rotate(62deg); }
+.penalty-keeper.dive-center { transform: translateY(-14px); }
+
+.penalty-ball {
+  position: absolute;
+  left: 50%;
+  bottom: 44px;
+  width: 26px;
+  height: 26px;
+  margin-left: -13px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #1f2937 0 4px, transparent 5px),
+    radial-gradient(circle at 30% 30%, #fff, #d9d9d9);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  transition: transform 420ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.penalty-ball.aim-left { transform: translate(-130px, -170px) scale(0.7) rotate(-360deg); }
+.penalty-ball.aim-center { transform: translate(0, -178px) scale(0.7) rotate(360deg); }
+.penalty-ball.aim-right { transform: translate(130px, -170px) scale(0.7) rotate(360deg); }
+
+.penalty-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.penalty-status.is-goal,
+.penalty-status.is-save {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  animation: status-pop 260ms ease;
+}
+
+@keyframes status-pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .penalty-keeper,
+  .penalty-ball,
+  .hobby-tile {
+    transition: none;
+  }
+  .guitar-string.ringing .string-line,
+  .hobby-panel,
+  .penalty-status {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .hobby-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .penalty-ball.aim-left { transform: translate(-95px, -170px) scale(0.7) rotate(-360deg); }
+  .penalty-ball.aim-right { transform: translate(95px, -170px) scale(0.7) rotate(360deg); }
+  .penalty-keeper.dive-left { transform: translateX(-200%) rotate(-62deg); }
+  .penalty-keeper.dive-right { transform: translateX(200%) rotate(62deg); }
+}

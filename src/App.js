@@ -6,9 +6,11 @@ import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
+import Hobbies from './components/Hobbies/Hobbies';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
 import experience, { education, certifications } from './data/experience';
+import hobbies from './data/hobbies';
 
 function MainContent() {
   const name = 'Davis Wollesen';
@@ -35,6 +37,7 @@ function MainContent() {
     if (path === '/') return 'about';
     if (path.startsWith('/blog')) return 'blog';
     if (path === '/projects') return 'projects';
+    if (path === '/hobbies') return 'hobbies';
     if (path === '/contact') return 'contact';
     return 'about';
   };
@@ -64,6 +67,12 @@ function MainContent() {
         <Route path="/blog" element={
           <main className="content-full">
             <Blog />
+          </main>
+        } />
+
+        <Route path="/hobbies" element={
+          <main className="content-full">
+            <Hobbies hobbies={hobbies} />
           </main>
         } />
 

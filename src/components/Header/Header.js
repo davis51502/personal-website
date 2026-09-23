@@ -30,6 +30,7 @@ export default function Header({ name, title, activeSection, onNavigate }) {
           {navLink('about', 'About')}
           {navLink('projects', 'Projects')}
           {navLink('blog', 'Reviews')}
+          {navLink('hobbies', 'Hobbies')}
           {navLink('contact', 'Contact')}
         </nav>
       </div>
