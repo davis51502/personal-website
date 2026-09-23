@@ -26,3 +26,11 @@ test('hobbies page shows tiles and the penalty game', () => {
   fireEvent.click(screen.getByRole('tab', { name: /soccer/i }));
   expect(screen.getByRole('button', { name: /shoot left/i })).toBeInTheDocument();
 });
+
+test('AI page replays text-to-SQL runs, including a blocked one', async () => {
+  window.location.hash = '#/ai';
+  render(<App />);
+  expect(screen.getByRole('heading', { name: /ai in practice/i })).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: /ceo of telsa/i }));
+  expect(await screen.findByText(/blocked/i)).toBeInTheDocument();
+});

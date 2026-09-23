@@ -7,10 +7,12 @@ import Projects from './components/Projects/Projects';
 import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Hobbies from './components/Hobbies/Hobbies';
+import AI from './components/AI/AI';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
 import experience, { education, certifications } from './data/experience';
 import hobbies from './data/hobbies';
+import { approach, caseStudies, sqlDemo, aiArticle } from './data/ai';
 
 function MainContent() {
   const name = 'Davis Wollesen';
@@ -37,6 +39,7 @@ function MainContent() {
     if (path === '/') return 'about';
     if (path.startsWith('/blog')) return 'blog';
     if (path === '/projects') return 'projects';
+    if (path === '/ai') return 'ai';
     if (path === '/hobbies') return 'hobbies';
     if (path === '/contact') return 'contact';
     return 'about';
@@ -61,6 +64,12 @@ function MainContent() {
         <Route path="/projects" element={
           <main className="content-full">
             <Projects projects={projects} />
+          </main>
+        } />
+
+        <Route path="/ai" element={
+          <main className="content-full">
+            <AI approach={approach} caseStudies={caseStudies} sqlDemo={sqlDemo} article={aiArticle} />
           </main>
         } />
 

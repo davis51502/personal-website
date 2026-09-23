@@ -29,6 +29,7 @@ export default function Header({ name, title, activeSection, onNavigate }) {
         <nav className="main-nav" aria-label="Primary">
           {navLink('about', 'About')}
           {navLink('projects', 'Projects')}
+          {navLink('ai', 'AI')}
           {navLink('blog', 'Reviews')}
           {navLink('hobbies', 'Hobbies')}
           {navLink('contact', 'Contact')}
