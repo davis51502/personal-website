@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ResumeDrawer from '../ResumeDrawer/ResumeDrawer';
+import Experience from '../Experience/Experience';
 import './About.css';
 
 const RESUME_HREF = encodeURI('/(Resume Davis Wollesen).pdf');
@@ -12,6 +13,9 @@ export default function About({
   photo,
   bio,
   skillGroups = [],
+  experience = [],
+  education = [],
+  certifications = [],
 }) {
   const [resumeOpen, setResumeOpen] = useState(false);
 
@@ -19,7 +23,7 @@ export default function About({
     <section id="about" className="about">
       <div className="about-hero">
         {photo && (
-          <img className="portrait" src={photo} alt={`${name}`} />
+          <img className="portrait" src={photo} alt={`Portrait of ${name}`} />
         )}
 
         <div className="about-identity">
@@ -37,6 +41,9 @@ export default function About({
             >
               View resume
             </button>
+            <a href={RESUME_HREF} download="Davis Wollesen Resume.pdf">
+              Download PDF
+            </a>
             {socials.map((s) => (
               <a
                 key={s.name}
@@ -63,6 +70,12 @@ export default function About({
           ))}
         </div>
       )}
+
+      <Experience
+        experience={experience}
+        education={education}
+        certifications={certifications}
+      />
 
       <ResumeDrawer
         open={resumeOpen}

@@ -28,3 +28,45 @@
     padding-bottom: 3rem;
   }
 }
+
+.contact-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact .contact-primary {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--color-heading);
+}
+
+.contact-copy {
+  appearance: none;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.contact-copy:hover,
+.contact-copy:focus-visible {
+  color: var(--color-heading);
+  border-color: var(--color-accent);
+}
+
+.contact-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-line);
+  max-width: 760px;
+}

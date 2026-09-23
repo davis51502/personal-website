@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
@@ -8,17 +8,18 @@ import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
+import experience, { education, certifications } from './data/experience';
 
 function MainContent() {
   const name = 'Davis Wollesen';
-  const title = 'Software Engineer/Investment Analyst';
+  const title = 'Software Engineer · Investment Analyst';
   
-  const bio = "I'm a Computer Science major specializing in applying technical expertise to financial markets and investment strategies. With a strong foundation in software development and data analysis, I'm passionate about building data-driven solutions that uncover investment insights and optimize portfolio performance. My goal is to bridge the gap between cutting-edge technology and quantitative finance.";
+  const bio = "I'm a software engineer with a B.S. in Computer Science from BYU, focused on applying technical skills to financial markets and investment strategy. I've built AWS data pipelines over terabytes of healthcare data, shipped production websites, and built my own investment research tools. I'm most interested in data-driven work that bridges engineering and quantitative finance.";
   
   const skillGroups = [
     {
       label: 'Languages & tools',
-      items: ['Python', 'JavaScript', 'React', 'Node.js', 'SQL & PostgreSQL', 'Pandas & NumPy', 'Git & Docker', 'API Integration'],
+      items: ['Python', 'JavaScript', 'React', 'Node.js', 'SQL (PostgreSQL, MySQL)', 'Pandas, NumPy & scikit-learn', 'AWS', 'Git & Docker', 'API Integration'],
     },
     {
       label: 'Markets & analysis',
@@ -44,6 +45,11 @@ function MainContent() {
 
   const activeSection = getActiveSection();
 
+  // Start each page at the top instead of keeping the previous page's scroll.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div className="App">
       <Header name={name} title={title} activeSection={activeSection} onNavigate={handleNavigate} />
@@ -63,7 +69,7 @@ function MainContent() {
 
         <Route path="/contact" element={
           <main className="content-full">
-            <Contact email="daviswollesen@gmail.com" />
+            <Contact email="daviswollesen@gmail.com" socials={socials} />
           </main>
         } />
         
@@ -77,6 +83,9 @@ function MainContent() {
               photo="/IMG_0922.jpeg"
               bio={bio}
               skillGroups={skillGroups}
+              experience={experience}
+              education={education}
+              certifications={certifications}
             />
           </main>
         } />
