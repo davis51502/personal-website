@@ -8,6 +8,7 @@ import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Hobbies from './components/Hobbies/Hobbies';
 import AI from './components/AI/AI';
+import Race from './components/Race/Race';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
 import experience, { education, certifications } from './data/experience';
@@ -39,6 +40,7 @@ function MainContent() {
     if (path.startsWith('/blog')) return 'blog';
     if (path === '/projects') return 'projects';
     if (path === '/ai') return 'ai';
+    if (path === '/race') return 'race';
     if (path === '/hobbies') return 'hobbies';
     if (path === '/contact') return 'contact';
     return 'about';
@@ -65,6 +67,12 @@ function MainContent() {
         <Route path="/ai" element={
           <main className="content-full">
             <AI approach={approach} caseStudies={caseStudies} sqlDemo={sqlDemo} article={aiArticle} />
+          </main>
+        } />
+
+        <Route path="/race" element={
+          <main className="content-full">
+            <Race />
           </main>
         } />
 
