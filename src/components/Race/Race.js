@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import RaceChart, { formatPct } from './RaceChart';
-import { RACE_DATA_URL, MODEL_COLORS, PERSONA_COLORS, BENCHMARK_COLOR, raceRules } from '../../data/race';
+import { RACE_DATA_URL, MODEL_COLORS, PERSONA_COLORS, BENCHMARK_COLOR, raceRules, optionsRules } from '../../data/race';
 import './Race.css';
 
 const FEED_PAGE = 12;
@@ -18,6 +18,8 @@ function FeeNote({ fees, startingCash }) {
     </>
   );
 }
+
+const shortDate = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
 const longDate = (iso) =>
   iso ? new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) : '';
@@ -281,9 +283,144 @@ function ModelView({ data, model, personas, highlight, setHighlight }) {
   );
 }
 
+function OptionsView({ desk, data, highlight, setHighlight }) {
+  const live = desk.status === 'live';
+  const bench = desk.benchmark.return_pct;
+  const traders = [...desk.traders].sort((a, b) => b.return_pct - a.return_pct);
+  const modelsById = Object.fromEntries(data.models.map((m) => [m.id, m]));
+  const series = [
+    ...desk.traders.map((t) => ({ id: t.model, label: modelsById[t.model].label, color: MODEL_COLORS[t.model], points: t.history })),
+    benchmarkSeries(desk),
+  ];
+
+  return (
+    <>
+      <p className="race-desk-intro">
+        {desk.persona.emoji} Each AI also runs one <strong>options-only trader</strong> with its own $100,000. It can
+        buy calls and puts but never stock, so leverage works both ways: a bad bet can expire worthless.
+        {live && <> The desk opened {longDate(desk.start_date)}, so it has its own S&amp;P 500 line from that day.</>}
+      </p>
+
+      {!live && (
+        <div className="race-panel">
+          <div className="race-panel-head"><h3>Opening soon</h3></div>
+          <p className="race-desk-soon">
+            The three options traders pick their first positions{data.next_decision ? ` on ${longDate(data.next_decision)}` : ''} and
+            start trading at the next market open.
+          </p>
+        </div>
+      )}
+
+      {live && (
+        <>
+          <div className="race-scoreboard">
+            {traders.map((t, i) => (
+              <article
+                key={t.id}
+                className="race-score"
+                onPointerEnter={() => setHighlight(t.model)}
+                onPointerLeave={() => setHighlight(null)}
+              >
+                <p className="race-score-rank">{i === 0 ? '🏆 Leading' : `#${i + 1}`}</p>
+                <h3><Key color={MODEL_COLORS[t.model]} />{modelsById[t.model].label}</h3>
+                <p className="race-score-model">{modelsById[t.model].name}</p>
+                <p className="race-score-value"><Delta value={t.return_pct} digits={2} /></p>
+                <p className="race-score-meta">
+                  <Delta value={t.return_pct - bench} suffix=" pts" /> vs S&amp;P 500
+                </p>
+                <p className="race-score-meta race-score-costs">
+                  Trading fees <FeeNote fees={t.fees} startingCash={data.starting_cash} />
+                  {' · '}AI cost {t.api_cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <div className="race-panel">
+            <div className="race-panel-head">
+              <h3>Options traders’ returns</h3>
+              <p>S&amp;P 500 since {shortDate(desk.start_date)} <Delta value={bench} digits={2} /></p>
+            </div>
+            <Legend series={series} setHighlight={setHighlight} />
+            <RaceChart
+              series={series}
+              startingCash={data.starting_cash}
+              directLabels
+              highlight={highlight}
+              onHighlight={setHighlight}
+              label="Line chart of each AI's options trader's return compared with the S&P 500"
+            />
+          </div>
+
+          <div className="race-traders">
+            {traders.map((t) => {
+              const latest = data.feed.find((f) => f.trader === t.id && f.status === 'executed');
+              const expired = desk.expirations.filter((e) => e.trader === t.id).slice(0, 3);
+              return (
+                <article key={t.id} className="race-trader">
+                  <header>
+                    <h4><Key color={MODEL_COLORS[t.model]} />{modelsById[t.model].label}’s options book</h4>
+                    <Delta value={t.return_pct} digits={2} />
+                  </header>
+                  <ul className="race-contracts" aria-label={`${modelsById[t.model].label} option positions`}>
+                    {t.holdings.map((h) => (
+                      <li key={h.ticker}>
+                        <span className={`race-contract-kind ${h.kind}`}>{h.kind === 'call' ? 'Call' : 'Put'}</span>
+                        <span className="race-contract-name">
+                          {h.underlying} ${h.strike}
+                          <span className="race-contract-exp">{shortDate(h.expiry)} · {h.days_left}d left</span>
+                        </span>
+                        <span className="race-contract-weight">{(h.weight * 100).toFixed(0)}%</span>
+                        <Delta value={h.gain_pct} />
+                      </li>
+                    ))}
+                    <li className="race-contract-cash">
+                      <span className="race-contract-kind">Cash</span>
+                      <span className="race-contract-name">{money(t.cash)}</span>
+                      <span className="race-contract-weight">{(t.cash_weight * 100).toFixed(0)}%</span>
+                      <span />
+                    </li>
+                  </ul>
+                  {expired.length > 0 && (
+                    <ul className="race-expired" aria-label="Recently expired">
+                      {expired.map((e) => (
+                        <li key={`${e.date}${e.label}`}>
+                          Expired {shortDate(e.date)}: {e.label} {e.worthless ? 'worthless' : `paid ${money(e.value)}`}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="race-trader-costs">
+                    {t.trades} trades · <FeeNote fees={t.fees} startingCash={data.starting_cash} /> in fees
+                  </p>
+                  {latest && <blockquote className="race-trader-quote">“{latest.summary}”</blockquote>}
+                </article>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+function OptionsRules() {
+  return (
+    <div className="race-block race-rules">
+      <h3 className="race-subheading">How the Options Desk works</h3>
+      <ul>
+        {optionsRules.map((r) => <li key={r}>{r}</li>)}
+      </ul>
+    </div>
+  );
+}
+
 function Feed({ data, view, personas, modelsById }) {
   const [shown, setShown] = useState(FEED_PAGE);
-  const items = data.feed.filter((f) => view === 'compare' || f.model === view);
+  // The options desk is its own league, so its trades only appear on its own tab.
+  const items = data.feed.filter((f) => (view === 'options'
+    ? f.persona === 'options'
+    : f.persona !== 'options' && (view === 'compare' || f.model === view)));
   useEffect(() => setShown(FEED_PAGE), [view]);
 
   if (!items.length) return null;
@@ -302,6 +439,7 @@ function Feed({ data, view, personas, modelsById }) {
                 <span className="race-feed-model"><Key color={MODEL_COLORS[f.model]} />{m?.label}</span>
                 <span className="race-feed-date">
                   {f.status === 'failed' ? `Decided ${longDate(f.decided)}` : `Traded ${longDate(f.executed)}`}
+                  {f.status !== 'failed' && f.fees > 0 && <> · fees {money(f.fees)}</>}
                 </span>
               </p>
               {f.status === 'failed' ? (
@@ -313,7 +451,7 @@ function Feed({ data, view, personas, modelsById }) {
                     <ul className="race-changes" aria-label="Position changes">
                       {f.changes.slice(0, 8).map((c) => (
                         <li key={c.ticker} className={c.to > c.from ? 'up' : 'down'}>
-                          <span aria-hidden="true">{c.to > c.from ? '▲' : '▼'}</span> {c.ticker}{' '}
+                          <span aria-hidden="true">{c.to > c.from ? '▲' : '▼'}</span> {c.label || c.ticker}{' '}
                           {(c.from * 100).toFixed(0)}→{(c.to * 100).toFixed(0)}%
                         </li>
                       ))}
@@ -372,10 +510,14 @@ export default function Race() {
     return () => { cancelled = true; };
   }, []);
 
-  const personas = useMemo(() => Object.fromEntries((data?.personas || []).map((p) => [p.id, p])), [data]);
+  const desk = data?.options_desk;
+  const personas = useMemo(
+    () => Object.fromEntries([...(data?.personas || []), ...(desk ? [desk.persona] : [])].map((p) => [p.id, p])),
+    [data, desk],
+  );
   const modelsById = useMemo(() => Object.fromEntries((data?.models || []).map((m) => [m.id, m])), [data]);
   const requested = params.get('view');
-  const view = requested && modelsById[requested] ? requested : 'compare';
+  const view = requested && (modelsById[requested] || (requested === 'options' && desk)) ? requested : 'compare';
   const setView = (v) => {
     setHighlight(null);
     setParams(v === 'compare' ? {} : { view: v }, { replace: true });
@@ -411,7 +553,11 @@ export default function Race() {
           {live ? (
             <>
               <div className="race-tabs" role="tablist" aria-label="Choose a view">
-                {[{ id: 'compare', label: 'Compare models' }, ...data.models].map((m) => (
+                {[
+                  { id: 'compare', label: 'Compare models' },
+                  ...data.models,
+                  ...(desk ? [{ id: 'options', label: `${desk.persona.emoji} Options desk` }] : []),
+                ].map((m) => (
                   <button
                     key={m.id}
                     type="button"
@@ -420,19 +566,24 @@ export default function Race() {
                     className={view === m.id ? 'active' : ''}
                     onClick={() => setView(m.id)}
                   >
-                    {m.id !== 'compare' && <Key color={MODEL_COLORS[m.id]} />}
+                    {MODEL_COLORS[m.id] && <Key color={MODEL_COLORS[m.id]} />}
                     {m.label}
                   </button>
                 ))}
               </div>
 
-              {view === 'compare' ? (
+              {view === 'compare' && (
                 <CompareView data={data} personas={personas} highlight={highlight} setHighlight={setHighlight} />
-              ) : (
+              )}
+              {modelsById[view] && (
                 <ModelView data={data} model={modelsById[view]} personas={personas} highlight={highlight} setHighlight={setHighlight} />
+              )}
+              {view === 'options' && (
+                <OptionsView desk={desk} data={data} highlight={highlight} setHighlight={setHighlight} />
               )}
 
               <Feed data={data} view={view} personas={personas} modelsById={modelsById} />
+              {view === 'options' && <OptionsRules />}
             </>
           ) : (
             <div className="race-lineup">

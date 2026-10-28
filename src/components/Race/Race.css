@@ -701,3 +701,81 @@
   color: var(--color-muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* ---- Options desk ---- */
+
+.race-desk-intro {
+  margin-bottom: 1.25rem;
+  max-width: 48rem;
+  color: var(--color-text);
+}
+
+.race-desk-soon {
+  color: var(--color-muted);
+}
+
+.race-contracts {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.race-contracts li {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr) 2.4rem 4.4rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.86rem;
+}
+
+.race-contract-kind {
+  padding: 0.05rem 0;
+  border-radius: 999px;
+  background: #f0f0f3;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.race-contract-name {
+  display: grid;
+  font-weight: 600;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.race-contract-exp {
+  font-weight: 400;
+  font-size: 0.76rem;
+  color: var(--color-muted);
+}
+
+.race-contract-weight {
+  text-align: right;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.race-contracts .race-delta {
+  text-align: right;
+  font-size: 0.82rem;
+}
+
+.race-contract-cash .race-contract-name {
+  font-weight: 400;
+}
+
+.race-expired {
+  list-style: none;
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #ececef;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.race-trader .race-trader-costs {
+  margin-top: 0.75rem;
+}

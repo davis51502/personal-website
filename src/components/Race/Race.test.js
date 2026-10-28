@@ -54,3 +54,53 @@ test('per-model view lists fees and tolerates personas some models lack', async 
   fireEvent.click(screen.getByRole('tab', { name: /gemini/i }));
   expect(screen.getByRole('heading', { name: /Gemini Model’s 3 traders/ })).toBeInTheDocument();
 });
+
+const optionsTrader = (model, ret) => ({
+  ...trader(model, 'options', 120, ret),
+  api_cost: 0.1, failed_decisions: 0, cash: 40000, cash_weight: 0.4,
+  holdings: [{
+    ticker: 'NVDA261218C00220000', label: 'NVDA $220 call · Dec 18', underlying: 'NVDA', kind: 'call',
+    strike: 220, expiry: '2026-12-18', days_left: 80, contracts: 10, value: 60000, weight: 0.6, gain_pct: 12.5,
+  }],
+});
+
+const withDesk = {
+  ...fixture,
+  options_desk: {
+    status: 'live', start_date: '2026-09-28',
+    persona: { id: 'options', label: 'Options Trader', emoji: '🎯', blurb: 'Calls and puts only.', max_weight: 0.25 },
+    benchmark: fixture.benchmark,
+    traders: [optionsTrader('claude', 4), optionsTrader('chatgpt', -2), optionsTrader('gemini', 1)],
+    expirations: [{ date: '2026-09-29', trader: 'gemini:options', model: 'gemini', label: 'SPY $700 put · Sep 29', value: 0, worthless: true }],
+  },
+  feed: [
+    { id: 1, trader: 'claude:options', model: 'claude', persona: 'options', decided: '2026-09-25', executed: '2026-09-28',
+      status: 'executed', summary: 'Buying NVDA calls.', reasoning: 'Because.', fees: 600,
+      changes: [{ ticker: 'NVDA261218C00220000', label: 'NVDA $220 call · Dec 18', from: 0, to: 0.6 }] },
+    { id: 2, trader: 'claude:value', model: 'claude', persona: 'value', decided: '2026-09-25', executed: '2026-09-28',
+      status: 'executed', summary: 'Buying moats.', reasoning: 'Because.', fees: 100, changes: [] },
+  ],
+};
+
+test('options desk tab shows each AI\'s contracts and keeps its trades out of the stock feed', async () => {
+  global.fetch = jest.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve(withDesk) }));
+  render(<MemoryRouter><Race /></MemoryRouter>);
+
+  // The main race feed only has the stock trader.
+  expect(await screen.findByText('“Buying moats.”')).toBeInTheDocument();
+  expect(screen.queryByText('“Buying NVDA calls.”')).not.toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole('tab', { name: /options desk/i }));
+  const book = screen.getByRole('list', { name: 'Claude option positions' });
+  expect(within(book).getByText(/NVDA \$220/)).toBeInTheDocument();
+  expect(screen.getByText(/SPY \$700 put · Sep 29 worthless/)).toBeInTheDocument();
+  expect(screen.getAllByText('“Buying NVDA calls.”').length).toBeGreaterThan(0);
+  expect(screen.queryByText('“Buying moats.”')).not.toBeInTheDocument();
+  expect(screen.getByText('NVDA $220 call · Dec 18 0→60%')).toBeInTheDocument();
+});
+
+test('race data without an options desk shows no options tab', async () => {
+  render(<MemoryRouter><Race /></MemoryRouter>);
+  await screen.findByRole('tab', { name: /claude/i });
+  expect(screen.queryByRole('tab', { name: /options desk/i })).not.toBeInTheDocument();
+});

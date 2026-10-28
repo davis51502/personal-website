@@ -28,6 +28,13 @@ export const raceRules = [
   'Each model runs the same five personalities with identical prompts, market data, and headlines.',
   'Once a week, after Friday’s close, every trader picks a new portfolio. Trades fill at Monday’s open.',
   'Only 60 well-known US stocks are allowed. No shorting, no leverage, at most 25% in one stock (50% for YOLO).',
-  'Every trade costs 0.1%, so churning the portfolio has a price.',
+  'Every stock trade costs 0.1% and every options trade 1% (roughly the bid-ask spread), so churning the portfolio has a price. Fees are shown for every trader.',
   'The S&P 500 line is $100,000 put into SPY on day one and never touched.',
+];
+
+export const optionsRules = [
+  'Each model also runs one options-only trader with its own $100,000. It can buy calls and puts on 20 big stocks and ETFs, but never sell options or hold stock, so the most it can lose is what it paid.',
+  'Contracts are valued daily with the Black-Scholes model, using the stock’s real price and each contract’s implied volatility from the live options market.',
+  'Contracts held to expiry settle for their intrinsic value in cash. Out of the money means worthless.',
+  'The Options Desk started later than the main race, so its S&P 500 line starts on its own first day.',
 ];
