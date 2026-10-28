@@ -672,3 +672,32 @@
     width: 100%;
   }
 }
+
+/* ---- Trading costs ---- */
+
+.race-fee-drag {
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.race-score-costs {
+  margin-top: 0.35rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.race-h2h-fees th,
+.race-h2h-fees td {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+.race-h2h-fees td.winner {
+  color: var(--color-heading);
+}
+
+.race-trader-costs {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}

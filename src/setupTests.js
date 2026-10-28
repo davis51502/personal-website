@@ -7,3 +7,6 @@ import '@testing-library/jest-dom';
 // React Router v7 expects TextEncoder, which Jest's jsdom environment lacks.
 import { TextEncoder, TextDecoder } from 'util';
 Object.assign(global, { TextEncoder, TextDecoder });
+
+// jsdom doesn't implement scrolling; the app scrolls to top on every page change.
+window.scrollTo = () => {};

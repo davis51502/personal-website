@@ -8,6 +8,17 @@ const FEED_PAGE = 12;
 
 const money = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
+// Fees expressed as percentage points of return lost, so they compare directly with returns.
+const feeDrag = (fees, startingCash) => -(fees / startingCash) * 100;
+
+function FeeNote({ fees, startingCash }) {
+  return (
+    <>
+      {money(fees)} <span className="race-fee-drag">({feeDrag(fees, startingCash).toFixed(2).replace('-', '−')} pts)</span>
+    </>
+  );
+}
+
 const longDate = (iso) =>
   iso ? new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) : '';
 
@@ -52,6 +63,8 @@ function benchmarkSeries(data) {
 function CompareView({ data, personas, highlight, setHighlight }) {
   const bench = data.benchmark.return_pct;
   const models = [...data.models].sort((a, b) => b.return_pct - a.return_pct);
+  const teamFees = (modelId) => data.traders.filter((t) => t.model === modelId).reduce((sum, t) => sum + t.fees, 0);
+  const lowestFees = Math.min(...data.models.map((m) => teamFees(m.id)));
   const series = [
     ...data.models.map((m) => ({ id: m.id, label: m.label, color: MODEL_COLORS[m.id], points: m.history })),
     benchmarkSeries(data),
@@ -78,6 +91,10 @@ function CompareView({ data, personas, highlight, setHighlight }) {
                 <Delta value={m.return_pct - bench} suffix=" pts" /> vs S&amp;P 500
               </p>
               {best && <p className="race-score-meta">Best trader: {best.emoji} {best.label}</p>}
+              <p className="race-score-meta race-score-costs">
+                Trading fees <FeeNote fees={teamFees(m.id)} startingCash={data.starting_cash * team.length} />
+                {' · '}AI cost {m.api_cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+              </p>
             </article>
           );
         })}
@@ -85,7 +102,7 @@ function CompareView({ data, personas, highlight, setHighlight }) {
 
       <div className="race-panel">
         <div className="race-panel-head">
-          <h3>Average return of each model’s five traders</h3>
+          <h3>Average return of each model’s traders</h3>
           <p>S&amp;P 500 <Delta value={bench} digits={2} /></p>
         </div>
         <Legend series={series} setHighlight={setHighlight} />
@@ -102,7 +119,7 @@ function CompareView({ data, personas, highlight, setHighlight }) {
       <div className="race-panel">
         <div className="race-panel-head">
           <h3>Head to head</h3>
-          <p>Same personality, same data, different AI. Best in each row marked 🏆.</p>
+          <p>Same personality, same data, different AI. Best in each row marked 🏆 (for fees, the lowest).</p>
         </div>
         <div className="race-table-wrap">
           <table className="race-table race-h2h">
@@ -133,6 +150,15 @@ function CompareView({ data, personas, highlight, setHighlight }) {
                 <th scope="row">Team average</th>
                 {data.models.map((m) => <td key={m.id}><Delta value={m.return_pct} digits={2} /></td>)}
               </tr>
+              <tr className="race-h2h-fees">
+                <th scope="row">Fees paid</th>
+                {data.models.map((m) => (
+                  <td key={m.id} className={teamFees(m.id) === lowestFees ? 'winner' : ''}>
+                    {money(teamFees(m.id))}
+                    {teamFees(m.id) === lowestFees && <span className="race-trophy" aria-label="lowest fees"> 🏆</span>}
+                  </td>
+                ))}
+              </tr>
             </tbody>
           </table>
         </div>
@@ -145,9 +171,10 @@ function ModelView({ data, model, personas, highlight, setHighlight }) {
   const bench = data.benchmark.return_pct;
   const traders = data.traders.filter((t) => t.model === model.id).sort((a, b) => b.return_pct - a.return_pct);
   const series = [
-    ...data.personas.map((p) => {
+    // A persona can exist before every model has a trader for it (e.g. a newly added one), so skip gaps.
+    ...data.personas.flatMap((p) => {
       const t = data.traders.find((tr) => tr.model === model.id && tr.persona === p.id);
-      return { id: p.id, label: `${p.emoji} ${p.label}`, color: PERSONA_COLORS[p.id], points: t.history };
+      return t ? [{ id: p.id, label: `${p.emoji} ${p.label}`, color: PERSONA_COLORS[p.id], points: t.history }] : [];
     }),
     benchmarkSeries(data),
   ];
@@ -156,7 +183,7 @@ function ModelView({ data, model, personas, highlight, setHighlight }) {
     <>
       <div className="race-panel">
         <div className="race-panel-head">
-          <h3>{model.name}’s five traders</h3>
+          <h3>{model.name}’s {traders.length} traders</h3>
           <p>Team average <Delta value={model.return_pct} digits={2} /> · S&amp;P 500 <Delta value={bench} digits={2} /></p>
         </div>
         <Legend series={series} setHighlight={setHighlight} />
@@ -165,7 +192,7 @@ function ModelView({ data, model, personas, highlight, setHighlight }) {
           startingCash={data.starting_cash}
           highlight={highlight}
           onHighlight={setHighlight}
-          label={`Line chart of ${model.name}'s five traders' returns compared with the S&P 500`}
+          label={`Line chart of ${model.name}'s traders' returns compared with the S&P 500`}
         />
 
         <div className="race-table-wrap">
@@ -180,6 +207,7 @@ function ModelView({ data, model, personas, highlight, setHighlight }) {
                 <th scope="col" className="race-hide-sm">Today</th>
                 <th scope="col" className="race-hide-sm">Worst drop</th>
                 <th scope="col" className="race-hide-sm">Trades</th>
+                <th scope="col">Fees</th>
               </tr>
             </thead>
             <tbody>
@@ -200,6 +228,7 @@ function ModelView({ data, model, personas, highlight, setHighlight }) {
                     <td className="race-hide-sm"><Delta value={t.day_change_pct} digits={2} /></td>
                     <td className="race-hide-sm">{formatPct(t.max_drawdown_pct)}</td>
                     <td className="race-hide-sm">{t.trades}</td>
+                    <td><FeeNote fees={t.fees} startingCash={data.starting_cash} /></td>
                   </tr>
                 );
               })}
@@ -240,6 +269,9 @@ function ModelView({ data, model, personas, highlight, setHighlight }) {
                   </li>
                 ))}
               </ul>
+              <p className="race-trader-costs">
+                {t.trades} trades · <FeeNote fees={t.fees} startingCash={data.starting_cash} /> in fees
+              </p>
               {latest && <blockquote className="race-trader-quote">“{latest.summary}”</blockquote>}
             </article>
           );

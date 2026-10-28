@@ -17,6 +17,8 @@ export const PERSONA_COLORS = {
   news: '#1baf7a',
   contrarian: '#eda100',
   yolo: '#e87ba4',
+  // Reserved for the planned options/derivatives trader; shows up once the engine publishes it.
+  derivatives: '#00838f',
 };
 
 export const BENCHMARK_COLOR = '#6e6e73';
