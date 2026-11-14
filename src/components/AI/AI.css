@@ -1,5 +1,5 @@
 .ai {
-  padding: 0.5rem 0 var(--space-2xl);
+  padding: 1rem 0 var(--space-2xl);
 }
 
 /* ---- Approach ---- */
@@ -107,7 +107,8 @@
   min-height: 300px;
   padding: 1.1rem 1.2rem;
   border-radius: var(--radius-md);
-  background: #0f172a;
+  background: #05070a;
+  border: 1px solid var(--color-line);
   color: #e2e8f0;
   font-size: 0.9rem;
   display: grid;
@@ -174,7 +175,7 @@
 .term-table td {
   padding: 0.3rem 0.9rem 0.3rem 0;
   text-align: left;
-  border-bottom: 1px solid #1e293b;
+  border-bottom: 1px solid var(--color-line);
 }
 
 .term-table th {

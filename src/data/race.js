@@ -3,25 +3,25 @@ export const RACE_DATA_URL =
   process.env.REACT_APP_RACE_DATA_URL ||
   'https://raw.githubusercontent.com/davis51502/ai-race-data/main/race.json';
 
-// Chart colors. Validated for colorblind separation on a white surface;
-// models lean on brand hues so they read at a glance.
+// Chart colors, stepped for the site's dark surface (#11161d) and checked for
+// colorblind separation there. Models lean on brand hues so they read at a glance.
 export const MODEL_COLORS = {
-  claude: '#e34948',
-  chatgpt: '#008300',
-  gemini: '#4a3aa7',
+  claude: '#e66767',
+  chatgpt: '#0ca30c',
+  gemini: '#9085e9',
 };
 
 export const PERSONA_COLORS = {
-  value: '#2a78d6',
-  growth: '#eb6834',
-  news: '#1baf7a',
-  contrarian: '#eda100',
-  yolo: '#e87ba4',
+  value: '#3987e5',
+  growth: '#d95926',
+  news: '#199e70',
+  contrarian: '#c98500',
+  yolo: '#d55181',
   // Reserved for the planned options/derivatives trader; shows up once the engine publishes it.
-  derivatives: '#00838f',
+  derivatives: '#2aa7b3',
 };
 
-export const BENCHMARK_COLOR = '#6e6e73';
+export const BENCHMARK_COLOR = '#9aa3b2';
 
 export const raceRules = [
   'Every trader starts with $100,000 of simulated money.',

@@ -1,25 +1,23 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
-import About from './components/About/About';
-import Projects from './components/Projects/Projects';
+import Home from './components/Home/Home';
+import Work from './components/Work/Work';
 import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Hobbies from './components/Hobbies/Hobbies';
-import AI from './components/AI/AI';
 import Race from './components/Race/Race';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
 import experience, { education, certifications } from './data/experience';
 import hobbies from './data/hobbies';
+import { introLines, stats } from './data/home';
 import { approach, caseStudies, sqlDemo, aiArticle } from './data/ai';
 
 function MainContent() {
   const name = 'Davis Wollesen';
   const title = 'Software Engineer · Investment Analyst';
-  
-  const bio = "I'm a software engineer with a B.S. in Computer Science from BYU, focused on applying technical skills to financial markets and investment strategy. In New York I automate operations at City Skyline Realty Group with data pipelines and AI. Before that I built AWS pipelines over terabytes of healthcare data. On the side I run the AI Portfolio Race, a live experiment where Claude, ChatGPT, and Gemini manage simulated portfolios against the S&P 500. I'm most interested in data-driven work that bridges engineering and quantitative finance.";
 
   const skillGroups = [
     {
@@ -33,16 +31,14 @@ function MainContent() {
   ];
 
   const location = useLocation();
-  
+
   const getActiveSection = () => {
     const path = location.pathname;
     if (path === '/') return 'about';
     if (path.startsWith('/blog')) return 'blog';
-    if (path === '/projects') return 'projects';
-    if (path === '/ai') return 'ai';
+    if (path === '/work') return 'work';
     if (path === '/race') return 'race';
     if (path === '/hobbies') return 'hobbies';
-    if (path === '/contact') return 'contact';
     return 'about';
   };
 
@@ -58,17 +54,15 @@ function MainContent() {
       <Header name={name} title={title} activeSection={activeSection} />
       
       <Routes>
-        <Route path="/projects" element={
+        <Route path="/work" element={
           <main className="content-full">
-            <Projects projects={projects} />
+            <Work projects={projects} approach={approach} caseStudies={caseStudies} sqlDemo={sqlDemo} article={aiArticle} />
           </main>
         } />
 
-        <Route path="/ai" element={
-          <main className="content-full">
-            <AI approach={approach} caseStudies={caseStudies} sqlDemo={sqlDemo} article={aiArticle} />
-          </main>
-        } />
+        {/* Old addresses from before Projects and AI were merged. */}
+        <Route path="/projects" element={<Navigate to="/work" replace />} />
+        <Route path="/ai" element={<Navigate to="/work" replace />} />
 
         <Route path="/race" element={
           <main className="content-full">
@@ -96,14 +90,16 @@ function MainContent() {
         
         <Route path="/" element={
           <main className="content-full">
-            <About
+            <Home
               name={name}
               tagline={title}
               location="New York, NY"
               email="daviswollesen@gmail.com"
               socials={socials}
               photo="/IMG_0922.jpeg"
-              bio={bio}
+              introLines={introLines}
+              stats={stats}
+              featured={projects.slice(0, 3)}
               skillGroups={skillGroups}
               experience={experience}
               education={education}
@@ -113,7 +109,7 @@ function MainContent() {
         } />
       </Routes>
       
-      <Footer socials={socials} />
+      <Footer socials={socials} email="daviswollesen@gmail.com" />
     </div>
   );
 }

@@ -60,7 +60,7 @@
 .spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(17, 24, 39, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-top-color: var(--color-heading);
   border-radius: 50%;
   display: inline-block;
@@ -90,9 +90,9 @@
 }
 
 .error {
-  color: #b42318;
-  background: rgba(255, 242, 240, 0.92);
-  border-color: rgba(217, 45, 32, 0.18);
+  color: #f47067;
+  background: rgba(244, 112, 103, 0.08);
+  border-color: rgba(244, 112, 103, 0.3);
 }
 
 .loading {

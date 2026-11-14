@@ -3,7 +3,7 @@
   top: 0;
   z-index: 40;
   height: var(--header-height);
-  background: rgba(247, 248, 250, 0.82);
+  background: rgba(10, 13, 18, 0.82);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--color-line);
@@ -37,6 +37,7 @@
   object-fit: contain;
   padding: 2px;
   background: #fff;
+  filter: none;
   border-radius: 8px;
   border: 1px solid var(--color-line);
   flex-shrink: 0;
@@ -50,9 +51,10 @@
 }
 
 .brand .name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 .brand .title {
@@ -73,10 +75,11 @@
 }
 
 .main-nav a {
-  padding: 0.4rem 0.75rem;
+  padding: 0.35rem 0.7rem;
   border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
   color: var(--color-muted);
   white-space: nowrap;
   transition: color var(--transition-fast), background var(--transition-fast);
@@ -85,14 +88,14 @@
 .main-nav a:hover,
 .main-nav a:focus-visible {
   color: var(--color-heading);
-  background: rgba(11, 18, 32, 0.05);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .main-nav a.active,
 .main-nav a.active:hover,
 .main-nav a.active:focus-visible {
-  color: #fff;
-  background: var(--color-ink);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
 }
 
 @media (max-width: 900px) {
@@ -165,18 +168,19 @@
     left: 0;
     right: 0;
     padding: 0.5rem 1.5rem 1.5rem;
-    background: rgba(247, 248, 250, 0.98);
+    background: rgba(10, 13, 18, 0.98);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--color-line);
-    box-shadow: 0 16px 32px rgba(11, 18, 32, 0.08);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
     animation: menu-in 0.2s ease;
   }
 
   .mobile-menu a {
     padding: 0.8rem 0;
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 500;
     letter-spacing: -0.02em;
     color: var(--color-heading);
     border-bottom: 1px solid var(--color-line);

@@ -201,7 +201,7 @@ export default function RaceChart({ series, startingCash, directLabels = false, 
               className="race-crosshair"
             />
             {readout.map((r) => (
-              <circle key={r.id} cx={x(hoverIndex)} cy={y(r.value)} r="4" fill={r.color} stroke="#fff" strokeWidth="2" />
+              <circle key={r.id} cx={x(hoverIndex)} cy={y(r.value)} r="4" fill={r.color} stroke="var(--color-surface)" strokeWidth="2" />
             ))}
           </g>
         )}

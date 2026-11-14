@@ -9,11 +9,11 @@ test('renders name and experience on the home page', () => {
   render(<App />);
   expect(screen.getByRole('heading', { level: 1, name: /davis wollesen/i })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: /experience/i })).toBeInTheDocument();
-  expect(screen.getByText(/culmination bio/i)).toBeInTheDocument();
+  expect(screen.getByText('Culmination Bio')).toBeInTheDocument();
 });
 
 test('lists projects on the projects page', () => {
-  window.location.hash = '#/projects';
+  window.location.hash = '#/work';
   render(<App />);
   expect(screen.getByText('Multiplayer Chess')).toBeInTheDocument();
   expect(screen.getByText('Mini Bloomberg')).toBeInTheDocument();
@@ -21,9 +21,16 @@ test('lists projects on the projects page', () => {
   expect(screen.getByRole('link', { name: 'See it live' })).toHaveAttribute('href', '#/race');
 });
 
+test('old project and AI addresses land on the work page', () => {
+  window.location.hash = '#/projects';
+  render(<App />);
+  expect(screen.getByRole('heading', { level: 2, name: 'Work' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /ai in practice/i })).toBeInTheDocument();
+});
+
 test('home page shows the current role', () => {
   render(<App />);
-  expect(screen.getByText(/tech & property manager/i)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /tech & property manager/i })).toBeInTheDocument();
 });
 
 test('hobbies page shows tiles and the penalty game', () => {
@@ -46,9 +53,9 @@ test('each nav click adds exactly one history entry', () => {
   render(<App />);
   const primary = screen.getByRole('navigation', { name: 'Primary' });
   const before = window.history.length;
-  fireEvent.click(within(primary).getByRole('link', { name: 'Projects' }));
+  fireEvent.click(within(primary).getByRole('link', { name: 'Work' }));
   expect(window.history.length).toBe(before + 1);
-  expect(within(primary).getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
+  expect(within(primary).getByRole('link', { name: 'Work' })).toHaveAttribute('aria-current', 'page');
 });
 
 test('phone menu opens and closes after choosing a page', () => {
