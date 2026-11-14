@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProjectCard.css';
 
 export default function ProjectCard({ project }) {
@@ -17,6 +18,7 @@ export default function ProjectCard({ project }) {
       <p className="project-desc">{project.description}</p>
       {project.details?.notes && <p className="project-note">{project.details.notes}</p>}
       <div className="project-links">
+        {project.path && <Link to={project.path}>See it live</Link>}
         {project.url && (
           <a href={project.url} target="_blank" rel="noopener noreferrer">
             Live Demo

@@ -1,14 +1,27 @@
 const experience = [
   {
+    role: 'Tech & Property Manager',
+    org: 'City Skyline Realty Group',
+    location: 'New York, NY',
+    start: 'Oct 2026',
+    end: 'Present',
+    highlights: [
+      'Replaced outdated manual workflows with scripting and AI automation, saving ~20 hours of staff time per week.',
+      'Built a pipeline that pulls data from MRI property software and generates a balance report covering 500+ clients.',
+      'Automated lease renewal generation with AI and an updated data pipeline.',
+      'Replaced EZ Texting with an in-house messaging app, cutting software costs.',
+    ],
+  },
+  {
     role: 'Software Engineer Intern',
     org: 'Culmination Bio',
-    location: 'Hybrid, UT',
+    location: 'St. George, UT (Hybrid)',
     start: 'May 2024',
     end: 'May 2025',
     highlights: [
-      'Partnered with cross-functional teams to build and optimize AWS data pipelines.',
-      'Managed 3+ TB of patient data using PostgreSQL, SQL, Python, and AWS.',
-      'Refactored test infrastructure with a dynamic test database to strengthen data validation.',
+      'Built and optimized AWS data pipelines with cross-functional teams.',
+      'Managed 3+ TB of patient data using PostgreSQL, SQL, and Python.',
+      'Built a dynamic test database to strengthen data validation.',
     ],
   },
   {
@@ -18,8 +31,7 @@ const experience = [
     start: 'Nov 2023',
     end: 'Jan 2024',
     highlights: [
-      'Modeled life insurance scenarios with attorneys, analyzing financial metrics and risk products.',
-      "Managed the firm's digital platforms with close attention to detail and regulatory sensitivity.",
+      'Modeled life insurance scenarios with attorneys; analyzed financial metrics and risk products.',
     ],
   },
 ];
@@ -31,16 +43,17 @@ export const education = [
     location: 'Provo, UT',
     end: 'Apr 2026',
     details: [
-      'Coursework: Data Science, Data Structures & Algorithms, Discrete Mathematics, Advanced Software Design',
+      'Coursework: Data Structures & Algorithms, Linear Algebra, Statistical Modeling for Data Scientists, Data Science, Discrete Mathematics, Calculus',
       'Eagle Scout · BYU Developers Club · Special Olympics volunteer',
     ],
   },
 ];
 
 export const certifications = [
-  'Life, Accident & Health or Sickness license (CA)',
-  'Series 6 & 63 candidate',
-  'Spanish language certificate (advanced)',
+  'SIE (passed)',
+  'Series 63 (passed)',
+  'CA Life, Health, Accident & Sickness license',
+  'Spanish (advanced)',
 ];
 
 export default experience;

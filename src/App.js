@@ -19,16 +19,16 @@ function MainContent() {
   const name = 'Davis Wollesen';
   const title = 'Software Engineer · Investment Analyst';
   
-  const bio = "I'm a software engineer with a B.S. in Computer Science from BYU, focused on applying technical skills to financial markets and investment strategy. I've built AWS data pipelines over terabytes of healthcare data, shipped production websites, and built my own investment research tools. I'm most interested in data-driven work that bridges engineering and quantitative finance.";
-  
+  const bio = "I'm a software engineer with a B.S. in Computer Science from BYU, focused on applying technical skills to financial markets and investment strategy. In New York I automate operations at City Skyline Realty Group with data pipelines and AI. Before that I built AWS pipelines over terabytes of healthcare data. On the side I run the AI Portfolio Race, a live experiment where Claude, ChatGPT, and Gemini manage simulated portfolios against the S&P 500. I'm most interested in data-driven work that bridges engineering and quantitative finance.";
+
   const skillGroups = [
     {
       label: 'Languages & tools',
-      items: ['Python', 'JavaScript', 'React', 'Node.js', 'SQL (PostgreSQL, MySQL)', 'Pandas, NumPy & scikit-learn', 'AWS', 'Git & Docker', 'API Integration'],
+      items: ['Python (Pandas, NumPy, scikit-learn, XGBoost)', 'SQL (PostgreSQL, MySQL)', 'JavaScript & React', 'AWS', 'Docker', 'Git', 'Excel', 'PowerPoint'],
     },
     {
       label: 'Markets & analysis',
-      items: ['Data Analysis & Visualization', 'Financial Modeling', 'Statistical Analysis', 'Machine Learning', 'Quantitative Research', 'Portfolio Optimization', 'Risk Assessment'],
+      items: ['Predictive Modeling', 'Options Pricing (Black-Scholes)', 'Portfolio Backtesting', 'Financial Modeling', 'Statistical Analysis', 'Machine Learning', 'Risk Assessment'],
     },
   ];
 
@@ -98,7 +98,7 @@ function MainContent() {
           <main className="content-full">
             <About
               name={name}
-              location="Danville, CA"
+              location="New York, NY"
               email="daviswollesen@gmail.com"
               socials={socials}
               photo="/IMG_0922.jpeg"
