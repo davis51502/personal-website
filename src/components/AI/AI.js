@@ -88,9 +88,9 @@ export default function AI({ approach = [], caseStudies = [], sqlDemo = [], arti
       <div className="section-heading">
         <h2>AI in Practice</h2>
         <p className="section-lead">
-          I treat AI as an engineering tool, not a buzzword. The goal is to find where it creates real
-          business value, ground it in real data, put guardrails around it, and measure whether it
-          actually helps.
+          Most of what I&apos;ve built with AI is small and practical: a tool that answers questions
+          about a database, a matcher for a job board, a model that flags risk in patient data. This
+          page covers how I go about it, with a demo you can click through.
         </p>
       </div>
 
@@ -123,9 +123,9 @@ export default function AI({ approach = [], caseStudies = [], sqlDemo = [], arti
               <dl>
                 <dt>Problem</dt>
                 <dd>{cs.problem}</dd>
-                <dt>AI approach</dt>
+                <dt>What I built</dt>
                 <dd>{cs.approach}</dd>
-                <dt>Why it matters</dt>
+                <dt>What came of it</dt>
                 <dd>{cs.value}</dd>
               </dl>
               <p className="ai-case-stack">{cs.stack.join(' · ')}</p>
@@ -142,7 +142,7 @@ export default function AI({ approach = [], caseStudies = [], sqlDemo = [], arti
 
       {article && (
         <p className="ai-article">
-          More on how I think about AI adoption:{' '}
+          I wrote more about this on Medium:{' '}
           <a href={article.url} target="_blank" rel="noopener noreferrer">&ldquo;{article.title}&rdquo; →</a>
         </p>
       )}

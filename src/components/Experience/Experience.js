@@ -9,16 +9,17 @@ export default function Experience({ experience = [], education = [], certificat
         <ol className="timeline">
           {experience.map((job) => (
             <li key={`${job.org}-${job.role}`} className="timeline-item">
-              <div className="timeline-top">
-                <h3>
-                  {job.role} <span className="timeline-org">· {job.org}</span>
-                </h3>
+              <div className="timeline-aside">
                 <p className="timeline-dates">{job.start} – {job.end}</p>
+                <p className="timeline-location">{job.location}</p>
               </div>
-              <p className="timeline-location">{job.location}</p>
-              <ul className="timeline-highlights">
-                {job.highlights.map((h) => <li key={h}>{h}</li>)}
-              </ul>
+              <div className="timeline-body">
+                <h3>{job.role}</h3>
+                <p className="timeline-org">{job.org}</p>
+                <ul className="timeline-highlights">
+                  {job.highlights.map((h) => <li key={h}>{h}</li>)}
+                </ul>
+              </div>
             </li>
           ))}
         </ol>
@@ -29,16 +30,17 @@ export default function Experience({ experience = [], education = [], certificat
         <ol className="timeline">
           {education.map((ed) => (
             <li key={ed.school} className="timeline-item">
-              <div className="timeline-top">
-                <h3>
-                  {ed.degree} <span className="timeline-org">· {ed.school}</span>
-                </h3>
+              <div className="timeline-aside">
                 <p className="timeline-dates">{ed.end}</p>
+                <p className="timeline-location">{ed.location}</p>
               </div>
-              <p className="timeline-location">{ed.location}</p>
-              <ul className="timeline-highlights">
-                {ed.details.map((d) => <li key={d}>{d}</li>)}
-              </ul>
+              <div className="timeline-body">
+                <h3>{ed.degree}</h3>
+                <p className="timeline-org">{ed.school}</p>
+                <ul className="timeline-highlights">
+                  {ed.details.map((d) => <li key={d}>{d}</li>)}
+                </ul>
+              </div>
             </li>
           ))}
         </ol>

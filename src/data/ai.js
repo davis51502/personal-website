@@ -50,20 +50,20 @@ export const sqlDemo = [
 
 export const approach = [
   {
-    title: 'Start with the workflow',
-    text: 'Find the repetitive, high-volume task first, such as searching data, matching records, or drafting reports. Then decide whether AI is the right tool at all.',
+    title: 'Start with the work',
+    text: 'I look for the task someone does over and over, like digging through data, matching records or drafting the same report. Sometimes the answer is a plain script and no AI at all.',
   },
   {
-    title: 'Ground it in real data',
-    text: 'Give models the schema, the documents, and the context they need, so answers come from the business data instead of guesses.',
+    title: 'Give it the real data',
+    text: "A model that hasn't seen the schema or the documents will guess. I hand it both, so its answers come from the business's own data.",
   },
   {
-    title: 'Build in guardrails',
-    text: 'Validate every model output before it touches anything real: read-only queries, typed inputs, and human review where the stakes are high.',
+    title: 'Check everything it writes',
+    text: 'Nothing a model produces runs unchecked. Queries are read-only, inputs are typed, and a person reviews anything that matters.',
   },
   {
-    title: 'Measure the result',
-    text: 'Test against real examples, track what fails, and iterate on prompts and models until the tool actually saves time.',
+    title: 'See if it helped',
+    text: "I test against real examples and keep a list of what fails. If the tool doesn't save anyone time, it isn't finished.",
   },
 ];
 
@@ -71,20 +71,20 @@ export const caseStudies = [
   {
     title: 'Mini Bloomberg AI Terminal',
     kind: 'LLM · Text-to-SQL',
-    problem: 'Financial data locked behind SQL is out of reach for analysts who think in questions, not queries.',
+    problem: 'Analysts ask questions in English, but the financial data sits in a database that only answers SQL.',
     approach:
-      "Built a GPT-4o assistant that turns plain-English questions into SQL over company financials and valuations, then summarizes the results. Improved accuracy by moving from zero-shot prompting to a schema with explicit data types (e.g. 'WACC as a decimal').",
-    value: 'Self-serve data access for non-technical users, with a SELECT-only guardrail so the model can never modify data.',
+      'I built an assistant on GPT-4o that turns a plain-English question into SQL over company financials and valuations, runs it, and sums up the result. Accuracy was poor until I gave the model the schema with explicit data types, such as WACC stored as a decimal.',
+    value: "People who don't write SQL can look things up themselves. The tool only runs SELECT statements, so the model can't change any data.",
     stack: ['OpenAI API', 'Python', 'SQLite', 'Prompt engineering'],
     repo: 'https://github.com/davis51502/ai-db-452',
   },
   {
     title: 'Proyak: Semantic Matching',
     kind: 'Embeddings · Vector search',
-    problem: "Keyword matching misses candidates whose experience is relevant but described in different words.",
+    problem: 'Keyword search misses good candidates who describe the same experience in different words.',
     approach:
-      'Generated sentence embeddings (all-MiniLM-L6-v2) for specialties and interests, stored the vectors in Supabase, and ranked matches by cosine similarity through serverless edge functions.',
-    value: 'Matches candidates to employers by meaning rather than exact wording, which improves match quality in a hiring marketplace.',
+      'I turned each specialty and interest into a sentence embedding (all-MiniLM-L6-v2), stored the vectors in Supabase, and ranked matches by cosine similarity in serverless edge functions.',
+    value: 'Candidates and employers get matched on what they mean, even when their wording differs.',
     stack: ['Sentence Transformers', 'Supabase', 'Edge Functions', 'TypeScript'],
     repo: 'https://github.com/davis51502/proyak',
     url: 'https://proyak.click',
@@ -92,19 +92,19 @@ export const caseStudies = [
   {
     title: "Parkinson's Progression Models",
     kind: 'Classical ML',
-    problem: 'Clinicians need early warning of how the disease is likely to progress, using messy data spread across several sources.',
+    problem: "Clinicians want early warning of how a patient's disease will progress, and the data is messy and split across several sources.",
     approach:
-      'Merged clinical visits, patient background, and medical events into one dataset, then compared Random Forest, Logistic Regression, and Decision Tree models over 1- and 2-year windows.',
-    value: "Surfaces the key risk variables behind progression. Choosing interpretable models over an LLM was deliberate: the right tool, not the trendiest one.",
+      'I merged clinical visits, patient background and medical events into one dataset, then compared Random Forest, Logistic Regression and Decision Tree models over 1- and 2-year windows.',
+    value: 'The models point to the variables that best predict progression. I picked interpretable models over an LLM on purpose, since the point was to see which variables drive the prediction.',
     stack: ['Python', 'scikit-learn', 'Pandas'],
   },
   {
     title: 'AI-Assisted Engineering',
     kind: 'Developer productivity',
-    problem: 'Small teams need to ship and maintain production software quickly without letting quality slip.',
+    problem: 'A small team has to ship and maintain production software quickly without quality slipping.',
     approach:
-      'I use AI coding agents day to day for scaffolding, refactoring, and reviews, and I verify their output with tests, CI builds, and manual checks. This site is maintained that way.',
-    value: 'Faster delivery with the same bar for correctness. AI does the typing, while I own the design and the review.',
+      'I use AI coding agents every day for scaffolding, refactoring and reviews. I check what they write with tests, CI builds and my own read-through. This site is maintained that way.',
+    value: 'I ship faster and hold the code to the same standard. The design decisions and the final review are still mine.',
     stack: ['Claude Code', 'GitHub Actions', 'Testing'],
   },
 ];
