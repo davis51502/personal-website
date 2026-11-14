@@ -7,6 +7,7 @@ const RESUME_HREF = encodeURI('/(Resume Davis Wollesen).pdf');
 
 export default function About({
   name,
+  tagline,
   location,
   email,
   socials = [],
@@ -27,12 +28,14 @@ export default function About({
         )}
 
         <div className="about-identity">
+          {tagline && <p className="about-eyebrow">{tagline}</p>}
           {name && <h1 className="about-name">{name}</h1>}
           <p className="about-meta">
             {location}
             {location && email && <span aria-hidden="true"> · </span>}
             {email && <a href={`mailto:${email}`}>{email}</a>}
           </p>
+          <p className="bio">{bio}</p>
           <div className="about-actions">
             <button
               type="button"
@@ -41,7 +44,7 @@ export default function About({
             >
               View resume
             </button>
-            <a href={RESUME_HREF} download="Davis Wollesen Resume.pdf">
+            <a className="resume-download" href={RESUME_HREF} download="Davis Wollesen Resume.pdf">
               Download PDF
             </a>
             {socials.map((s) => (
@@ -58,14 +61,14 @@ export default function About({
         </div>
       </div>
 
-      <p className="bio">{bio}</p>
-
       {skillGroups.length > 0 && (
         <div className="skill-groups">
           {skillGroups.map((group) => (
             <div key={group.label} className="skill-group">
               <h2>{group.label}</h2>
-              <p>{group.items.join(', ')}</p>
+              <ul>
+                {group.items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
             </div>
           ))}
         </div>

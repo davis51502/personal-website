@@ -6,26 +6,28 @@
   --space-xl: 2.5rem;
   --space-2xl: 4rem;
   --container-width: 1080px;
-  --header-height: 52px;
-  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  --color-text: #1d1d1f;
-  --color-heading: #1d1d1f;
-  --color-muted: #6e6e73;
-  --color-accent: #0071e3;
-  --color-accent-strong: #0062c4;
-  --color-accent-soft: #e8f2fd;
+  --header-height: 60px;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --color-text: #1f2937;
+  --color-heading: #0b1220;
+  --color-muted: #5b6472;
+  --color-ink: #0b1220;
+  --color-accent: #0f766e;
+  --color-accent-strong: #115e59;
+  --color-accent-soft: #e6f4f1;
   --color-surface: #ffffff;
   --color-surface-strong: #ffffff;
-  --color-card-border: #d2d2d7;
-  --color-line: #d2d2d7;
-  --color-bg: #f5f5f7;
-  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 8px 28px rgba(0, 0, 0, 0.08);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --transition-fast: 0.2s ease;
+  --color-card-border: #e2e5ea;
+  --color-line: #e2e5ea;
+  --color-bg: #f7f8fa;
+  --shadow-soft: 0 1px 2px rgba(11, 18, 32, 0.04);
+  --shadow-card: 0 1px 2px rgba(11, 18, 32, 0.04), 0 12px 32px -12px rgba(11, 18, 32, 0.14);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition-fast: 0.18s ease;
 }
 
 *,
@@ -39,8 +41,9 @@
 body {
   font-family: var(--font-body);
   color: var(--color-text);
-  line-height: 1.5;
-  letter-spacing: -0.01em;
+  line-height: 1.6;
+  letter-spacing: -0.006em;
+  font-feature-settings: 'cv11', 'ss01';
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
@@ -80,7 +83,7 @@ select {
 .content-full {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 3rem var(--space-lg) 0;
+  padding: 3.5rem var(--space-lg) 0;
   width: 100%;
 }
 
@@ -95,14 +98,15 @@ select {
 .blog-title,
 .contact h2 {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.07;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
   color: var(--color-heading);
 }
 
 .section-eyebrow {
+  font-family: var(--font-mono);
   letter-spacing: 0.04em;
   font-size: 0.8rem;
   font-weight: 600;
@@ -114,9 +118,9 @@ select {
 .bio,
 .contact p {
   color: var(--color-muted);
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  line-height: 1.45;
-  max-width: 760px;
+  font-size: clamp(1.05rem, 1.6vw, 1.15rem);
+  line-height: 1.6;
+  max-width: 680px;
 }
 
 .surface-panel {
@@ -150,4 +154,15 @@ select {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-heading);
 }

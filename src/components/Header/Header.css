@@ -3,10 +3,10 @@
   top: 0;
   z-index: 40;
   height: var(--header-height);
-  background: rgba(251, 251, 253, 0.8);
+  background: rgba(247, 248, 250, 0.82);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--color-line);
   color: var(--color-heading);
 }
 
@@ -32,13 +32,13 @@
 }
 
 .title-logo {
-  height: 30px;
-  width: 30px;
+  height: 32px;
+  width: 32px;
   object-fit: contain;
   padding: 2px;
   background: #fff;
-  border-radius: 7px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  border: 1px solid var(--color-line);
   flex-shrink: 0;
 }
 
@@ -50,13 +50,14 @@
 }
 
 .brand .name {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .brand .title {
-  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
   color: var(--color-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -72,8 +73,8 @@
 }
 
 .main-nav a {
-  padding: 0.45rem 0.75rem;
-  border-radius: 980px;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-muted);
@@ -84,13 +85,14 @@
 .main-nav a:hover,
 .main-nav a:focus-visible {
   color: var(--color-heading);
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(11, 18, 32, 0.05);
 }
 
-.main-nav a.active {
-  color: var(--color-heading);
-  background: rgba(0, 0, 0, 0.06);
-  font-weight: 600;
+.main-nav a.active,
+.main-nav a.active:hover,
+.main-nav a.active:focus-visible {
+  color: #fff;
+  background: var(--color-ink);
 }
 
 @media (max-width: 900px) {
@@ -163,11 +165,11 @@
     left: 0;
     right: 0;
     padding: 0.5rem 1.5rem 1.5rem;
-    background: rgba(251, 251, 253, 0.97);
+    background: rgba(247, 248, 250, 0.98);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid var(--color-line);
+    box-shadow: 0 16px 32px rgba(11, 18, 32, 0.08);
     animation: menu-in 0.2s ease;
   }
 
@@ -177,7 +179,7 @@
     font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--color-heading);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .mobile-menu a:last-child {

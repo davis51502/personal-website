@@ -98,6 +98,7 @@ function MainContent() {
           <main className="content-full">
             <About
               name={name}
+              tagline={title}
               location="New York, NY"
               email="daviswollesen@gmail.com"
               socials={socials}

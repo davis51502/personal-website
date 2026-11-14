@@ -1,45 +1,53 @@
 .about {
   padding: 0.25rem 0 var(--space-2xl);
-  max-width: 960px;
 }
 
 .about-hero {
   display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: 2rem;
-  align-items: start;
-  margin-bottom: 2.25rem;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 300px);
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 3.5rem;
 }
 
 .portrait {
+  order: 2;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-card);
   display: block;
 }
 
 .about-identity {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  padding-bottom: 0.15rem;
+  gap: 0.75rem;
+}
+
+.about-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
 }
 
 .about-name {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
   color: var(--color-heading);
 }
 
 .about-meta {
   margin: 0;
   color: var(--color-muted);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
 }
 
 .about-meta a {
@@ -50,84 +58,116 @@
   color: var(--color-heading);
 }
 
+.bio {
+  margin: 0.5rem 0 0;
+  max-width: 38rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
 .about-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.35rem 1.15rem;
-  margin-top: 0.35rem;
+  gap: 0.6rem 1.25rem;
+  margin-top: 0.9rem;
 }
 
-.resume-trigger {
+.resume-trigger,
+.about-actions .resume-download {
   appearance: none;
-  border: 0;
-  padding: 0.5rem 1.1rem;
-  border-radius: 980px;
-  background: var(--color-accent);
-  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-md);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.resume-trigger {
+  border: 1px solid var(--color-ink);
+  background: var(--color-ink);
+  color: #fff;
 }
 
 .resume-trigger:hover,
 .resume-trigger:focus-visible {
   background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+}
+
+.about-actions .resume-download {
+  border: 1px solid var(--color-card-border);
+  background: var(--color-surface);
+  color: var(--color-heading);
+}
+
+.about-actions .resume-download:hover {
+  border-color: var(--color-ink);
+  text-decoration: none;
 }
 
 .about-actions a {
-  color: var(--color-accent);
-  font-size: 0.95rem;
-}
-
-.about-actions a::after {
-  content: ' ›';
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .about-actions a:hover {
-  text-decoration: underline;
-}
-
-.bio {
-  font-size: 1.05rem;
-  line-height: 1.75;
-  margin: 0 0 2.5rem;
-  max-width: 42rem;
+  color: var(--color-accent);
 }
 
 .skill-groups {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.75rem 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-line);
+  gap: 1.25rem;
+}
+
+.skill-group {
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
 }
 
 .skill-group h2 {
-  margin: 0 0 0.45rem;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 600;
+  margin: 0 0 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--color-muted);
 }
 
-.skill-group p {
-  margin: 0;
+.skill-group ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill-group li {
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
   color: var(--color-text);
-  font-size: 0.95rem;
-  line-height: 1.65;
+  font-size: 0.84rem;
 }
 
 @media (max-width: 720px) {
   .about-hero {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-    align-items: start;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .portrait {
-    max-width: 280px;
+    order: 0;
+    max-width: 180px;
+    aspect-ratio: 1;
   }
 
   .skill-groups {
