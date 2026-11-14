@@ -17,6 +17,13 @@ test('lists projects on the projects page', () => {
   render(<App />);
   expect(screen.getByText('Multiplayer Chess')).toBeInTheDocument();
   expect(screen.getByText('Mini Bloomberg')).toBeInTheDocument();
+  expect(screen.getByText('K1Flow')).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'See it live' })).toHaveAttribute('href', '#/race');
+});
+
+test('home page shows the current role', () => {
+  render(<App />);
+  expect(screen.getByText(/tech & property manager/i)).toBeInTheDocument();
 });
 
 test('hobbies page shows tiles and the penalty game', () => {
