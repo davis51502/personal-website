@@ -1,9 +1,9 @@
 .race {
   padding: 0.5rem 0 var(--space-2xl);
-  --race-up: #006300;
-  --race-down: #b42318;
-  --race-grid: #ececef;
-  --race-axis: #c7c7cc;
+  --race-up: #3fb950;
+  --race-down: #f47067;
+  --race-grid: #1c232d;
+  --race-axis: #3d4756;
 }
 
 .race-message {
@@ -28,7 +28,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.15rem 0.65rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   font-weight: 600;
@@ -40,8 +40,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #0ca30c;
-  box-shadow: 0 0 0 3px rgba(12, 163, 12, 0.18);
+  background: #3fb950;
+  box-shadow: 0 0 0 3px rgba(63, 185, 80, 0.2);
 }
 
 .race-tabs {
@@ -52,7 +52,8 @@
   margin-bottom: 1.25rem;
   width: fit-content;
   max-width: 100%;
-  background: #e8e8ed;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
 }
 
@@ -73,12 +74,12 @@
 }
 
 .race-tabs button:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .race-tabs button.active {
-  background: var(--color-surface);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
   font-weight: 600;
 }
 
@@ -253,7 +254,7 @@
   z-index: 2;
   min-width: 150px;
   padding: 0.55rem 0.7rem;
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(22, 28, 37, 0.97);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
@@ -318,7 +319,7 @@
 .race-table td {
   padding: 0.6rem 0.75rem;
   text-align: right;
-  border-bottom: 1px solid #ececef;
+  border-bottom: 1px solid var(--color-line);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
@@ -436,7 +437,7 @@
 
 .race-bar {
   height: 8px;
-  background: #f0f0f3;
+  background: var(--color-surface-strong);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -449,7 +450,7 @@
 }
 
 .race-bar-fill.cash {
-  background: #c7c7cc;
+  background: #4b5563;
 }
 
 .race-trader-quote {
@@ -538,7 +539,7 @@
 
 .race-changes li {
   padding: 0.1rem 0.5rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--color-bg);
   font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
@@ -572,7 +573,7 @@
   margin-top: 1rem;
   padding: 0.55rem 1.1rem;
   border: 1px solid var(--color-line);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   color: var(--color-accent);
   font-weight: 500;
@@ -608,7 +609,7 @@
 .race-lineup-models {
   margin-top: 1.25rem;
   padding-top: 1rem;
-  border-top: 1px solid #ececef;
+  border-top: 1px solid var(--color-line);
   color: var(--color-text);
 }
 
@@ -731,8 +732,8 @@
 
 .race-contract-kind {
   padding: 0.05rem 0;
-  border-radius: 999px;
-  background: #f0f0f3;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-strong);
   font-size: 0.72rem;
   font-weight: 600;
   text-align: center;
@@ -771,7 +772,7 @@
   list-style: none;
   margin-top: 0.75rem;
   padding-top: 0.6rem;
-  border-top: 1px solid #ececef;
+  border-top: 1px solid var(--color-line);
   font-size: 0.8rem;
   color: var(--color-muted);
 }
