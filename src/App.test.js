@@ -33,12 +33,11 @@ test('home page shows the current role', () => {
   expect(screen.getByRole('heading', { name: /tech & property manager/i })).toBeInTheDocument();
 });
 
-test('hobbies page shows tiles and the penalty game', () => {
+test('old hobbies address lands on the home page', () => {
   window.location.hash = '#/hobbies';
   render(<App />);
-  expect(screen.getByRole('tab', { name: /guitar/i })).toHaveAttribute('aria-selected', 'true');
-  fireEvent.click(screen.getByRole('tab', { name: /soccer/i }));
-  expect(screen.getByRole('button', { name: /shoot left/i })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { level: 1, name: /davis wollesen/i })).toBeInTheDocument();
+  expect(screen.queryByRole('link', { name: 'Off-hours' })).not.toBeInTheDocument();
 });
 
 test('AI page replays text-to-SQL runs, including a blocked one', async () => {

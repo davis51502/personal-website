@@ -6,18 +6,16 @@ import Home from './components/Home/Home';
 import Work from './components/Work/Work';
 import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
-import Hobbies from './components/Hobbies/Hobbies';
 import Race from './components/Race/Race';
 import Footer from './components/Footer/Footer';
 import projects, { socials } from './data/projects';
 import experience, { education, certifications } from './data/experience';
-import hobbies from './data/hobbies';
 import { introLines, stats } from './data/home';
 import { approach, caseStudies, sqlDemo, aiArticle } from './data/ai';
 
 function MainContent() {
   const name = 'Davis Wollesen';
-  const title = 'Software Engineer · Investment Analyst';
+  const title = 'Software Engineer · Data & Automation';
 
   const skillGroups = [
     {
@@ -38,7 +36,6 @@ function MainContent() {
     if (path.startsWith('/blog')) return 'blog';
     if (path === '/work') return 'work';
     if (path === '/race') return 'race';
-    if (path === '/hobbies') return 'hobbies';
     return 'about';
   };
 
@@ -76,11 +73,8 @@ function MainContent() {
           </main>
         } />
 
-        <Route path="/hobbies" element={
-          <main className="content-full">
-            <Hobbies hobbies={hobbies} />
-          </main>
-        } />
+        {/* The hobbies page was removed; send old links home. */}
+        <Route path="/hobbies" element={<Navigate to="/" replace />} />
 
         <Route path="/contact" element={
           <main className="content-full">
