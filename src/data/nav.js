@@ -4,7 +4,6 @@ const navItems = [
   { id: 'work', label: 'Work', path: '/work' },
   { id: 'race', label: 'AI Race', path: '/race' },
   { id: 'blog', label: 'Writing', path: '/blog' },
-  { id: 'hobbies', label: 'Off-hours', path: '/hobbies' },
 ];
 
 export default navItems;
